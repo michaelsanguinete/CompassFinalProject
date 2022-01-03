@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-01-03T15:14:43.460Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36" etag="S5BpapRIA8LSMg6E_CVf" version="16.1.2" type="github">
+<mxfile host="app.diagrams.net" modified="2022-01-03T15:15:27.781Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36" etag="3Uen8c_bT944DDi1X5Gr" version="16.1.2" type="github">
   <diagram id="TsXn9Hv0aFUgr4kS93P1" name="Page-1">
     <mxGraphModel dx="1102" dy="621" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -59,7 +59,7 @@
             <mxRectangle width="150" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="bE8FS_wa4v2eoMuHzQhY-14" value="Denunciante" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" vertex="1" parent="1">
+        <mxCell id="bE8FS_wa4v2eoMuHzQhY-14" value="Usuario" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" vertex="1" parent="1">
           <mxGeometry x="470" y="80" width="180" height="160" as="geometry" />
         </mxCell>
         <mxCell id="bE8FS_wa4v2eoMuHzQhY-15" value="" style="shape=partialRectangle;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=1;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="bE8FS_wa4v2eoMuHzQhY-14">
