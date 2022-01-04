@@ -3,8 +3,6 @@ package com.compass.finalproject.entity;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,12 +25,12 @@ public class Denuncias {
 	private Usuario denunciante;
 	@ManyToOne
 	private OrgaoResponsavel orgaoResponsavel;
-	@Enumerated(EnumType.STRING)
+	@ManyToOne
 	private Animais tipoAnimal;
 	@OneToOne
 	private Endereco enderecoDenuncia;
-	@Enumerated(EnumType.STRING)
-	private StatusDenuncia status = StatusDenuncia.Nao_Tratado;
+	@ManyToOne
+	private StatusDenuncia status = new StatusDenuncia("Aberto");
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 
 }
