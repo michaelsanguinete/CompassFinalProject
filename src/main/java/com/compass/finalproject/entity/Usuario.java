@@ -1,5 +1,6 @@
 package com.compass.finalproject.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,6 +24,6 @@ public class Usuario {
 	private String telefone;
 	private String email;
 	private String senha;
-	private List<Denuncias> listaDenuncias;
+	private List<Denuncias> listaDenuncias = new ArrayList<Denuncias>();
 
 }
