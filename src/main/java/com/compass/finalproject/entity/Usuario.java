@@ -28,6 +28,6 @@ public class Usuario {
 	private String email;
 	private String senha;
 	@OneToMany(mappedBy = "denunciante")
-	private List<Denuncias> listaDenuncias;
+	private List<Denuncias> listaDenuncias = new ArrayList<Denuncias>();
 
 }
