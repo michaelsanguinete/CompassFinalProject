@@ -16,6 +16,9 @@ public class Animais {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String tipo;
+	private AnimaisEnum tipo;
+	private String raça;
+	private String cor;
+	private Denuncias denuncia;
 
 }

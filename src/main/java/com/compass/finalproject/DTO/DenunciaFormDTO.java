@@ -1,4 +1,4 @@
-package com.compass.finalproject.dto;
+package com.compass.finalproject.DTO;
 
 import com.compass.finalproject.entity.*;
 import lombok.AllArgsConstructor;
