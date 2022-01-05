@@ -33,7 +33,7 @@ public class DenunciaServiceImpl implements DenunciaService{
     }
 
     @Override
-    public ResponseEntity<DenunciaDTO> update(int id) {
+    public ResponseEntity<DenunciaDTO> update(int id, DenunciaFormDTO formDTO) {
         // TODO Auto-generated method stub
         return null;
     }
