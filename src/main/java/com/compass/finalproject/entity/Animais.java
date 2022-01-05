@@ -19,6 +19,4 @@ public class Animais {
 	private AnimaisEnum tipo;
 	private String raça;
 	private String cor;
-	private Denuncias denuncia;
-
 }

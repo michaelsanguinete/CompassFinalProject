@@ -26,7 +26,7 @@ public class Denuncias {
 	private Usuario denunciante;
 	@ManyToOne
 	private OrgaoResponsavel orgaoResponsavel;
-	@OneToMany(mappedBy = "denuncia")
+	@OneToOne
 	private Animais tipoAnimal;
 	@OneToOne
 	private Endereco enderecoDenuncia;
