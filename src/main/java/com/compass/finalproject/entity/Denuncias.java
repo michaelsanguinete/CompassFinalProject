@@ -25,12 +25,11 @@ public class Denuncias {
 	private Usuario denunciante;
 	@ManyToOne
 	private OrgaoResponsavel orgaoResponsavel;
-	@ManyToOne
+	@OneToOne
 	private Animais tipoAnimal;
 	@OneToOne
 	private Endereco enderecoDenuncia;
-	@ManyToOne
-	private StatusDenuncia status = new StatusDenuncia("Aberto");
+	private StatusDenuncia status = StatusDenuncia.Aberto;
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 
 }
