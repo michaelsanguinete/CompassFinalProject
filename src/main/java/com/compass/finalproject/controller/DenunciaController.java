@@ -2,6 +2,7 @@ package com.compass.finalproject.controller;
 
 import com.compass.finalproject.DTO.DenunciaDTO;
 import com.compass.finalproject.DTO.DenunciaFormDTO;
+import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
 import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
 import com.compass.finalproject.service.DenunciaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,7 @@ public class DenunciaController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<DenunciaDTO> save(@RequestBody DenunciaFormDTO body){
+    public ResponseEntity<DenunciaDTO> save(@RequestBody DenunciaSaveFormDTO body){
         ResponseEntity<DenunciaDTO> denuncia = this.denunciaService.save(body);
         return ResponseEntity.ok(denuncia.getBody());
     }
