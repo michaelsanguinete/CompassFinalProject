@@ -1,8 +1,17 @@
 package com.compass.finalproject.service;
 
+
 import com.compass.finalproject.DTO.DenunciaDTO;
 import com.compass.finalproject.DTO.DenunciaFormDTO;
 import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.compass.finalproject.DTO.DenunciaDTO;
+import com.compass.finalproject.DTO.DenunciaFormDTO;
+import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
+
 import com.compass.finalproject.entity.AnimaisEnum;
 import com.compass.finalproject.entity.Denuncias;
 import com.compass.finalproject.entity.StatusDenuncia;
@@ -32,9 +41,15 @@ public class DenunciaServiceImpl implements DenunciaService{
     }
 
     @Override
-    public ResponseEntity<List<DenunciaDTO>> list() {
-        // TODO Auto-generated method stub
-        return null;
+    public ResponseEntity<List<DetalhesDenunciaDTO>> list() {
+        
+        List<Denuncias> denuncias = denunciaRepository.findAll();
+
+        List<DetalhesDenunciaDTO> detalhesDenunciaDTOs = new ArrayList<>();
+
+        denuncias.forEach(denuncia -> detalhesDenunciaDTOs.add(new DetalhesDenunciaDTO(denuncia)));
+
+        return ResponseEntity.ok(detalhesDenunciaDTOs);
     }
 
     @Override

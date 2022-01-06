@@ -2,7 +2,11 @@ package com.compass.finalproject.service;
 
 import com.compass.finalproject.DTO.DenunciaDTO;
 import com.compass.finalproject.DTO.DenunciaFormDTO;
+
 import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
+
+import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
+
 import com.compass.finalproject.entity.AnimaisEnum;
 import com.compass.finalproject.entity.StatusDenuncia;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +17,7 @@ public interface DenunciaService {
     
     ResponseEntity<DenunciaDTO> save(DenunciaSaveFormDTO formDTO);
 
-    ResponseEntity<List<DenunciaDTO>> list();
+    ResponseEntity<List<DetalhesDenunciaDTO>> list();
 
     ResponseEntity<DenunciaDTO> update(int id, DenunciaFormDTO formDTO);
 

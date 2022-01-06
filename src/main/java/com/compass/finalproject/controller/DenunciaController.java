@@ -3,6 +3,7 @@ package com.compass.finalproject.controller;
 import com.compass.finalproject.DTO.DenunciaDTO;
 import com.compass.finalproject.DTO.DenunciaFormDTO;
 import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
+import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
 import com.compass.finalproject.service.DenunciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,8 @@ public class DenunciaController {
 
     @GetMapping
     @Transactional
-    public ResponseEntity<List<DenunciaDTO>> listDenuncias (){
-        ResponseEntity<List<DenunciaDTO>> denuncias = this.denunciaService.list();
+    public ResponseEntity<List<DetalhesDenunciaDTO>> listDenuncias (){
+        ResponseEntity<List<DetalhesDenunciaDTO>> denuncias = this.denunciaService.list();
         return ResponseEntity.ok(denuncias.getBody());
     }
 

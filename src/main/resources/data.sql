@@ -1,9 +1,9 @@
-INSERT INTO ANIMAIS(tipo, raça, cor) VALUES('Cachorro','Golden Retriever','Amarelo');
-INSERT INTO ANIMAIS(tipo, raça, cor) VALUES('Cachorro','Shih tzu','Preto branco e amarelo');
-INSERT INTO ANIMAIS(tipo, raça, cor) VALUES('Gato','Persa','Branco');
-INSERT INTO ANIMAIS(tipo, raça, cor) VALUES('Gato','Siames','Preto e amarelo'); 
-INSERT INTO ANIMAIS(tipo, raça, cor) VALUES('Hamster','Anão russo','Listrado Preto e Branco');
-INSERT INTO ANIMAIS(tipo, raça, cor) VALUES('Hamster','Roborovski','Preto'); 
+INSERT INTO ANIMAIS(tipo, raca, cor) VALUES('Cachorro','Golden Retriever','Amarelo');
+INSERT INTO ANIMAIS(tipo, raca, cor) VALUES('Cachorro','Shih tzu','Preto branco e amarelo');
+INSERT INTO ANIMAIS(tipo, raca, cor) VALUES('Gato','Persa','Branco');
+INSERT INTO ANIMAIS(tipo, raca, cor) VALUES('Gato','Siames','Preto e amarelo'); 
+INSERT INTO ANIMAIS(tipo, raca, cor) VALUES('Hamster','Anão russo','Listrado Preto e Branco');
+INSERT INTO ANIMAIS(tipo, raca, cor) VALUES('Hamster','Roborovski','Preto'); 
 
 INSERT INTO ENDERECO(logradouro, estado, complemento, bairro, cidade, numero, cep) VALUES('Rua Fulano de Tal','Estado do João','Esquina com o bar', 'Bairro das Lamentacoes', 'Bem vindo', '25','35696581');
 INSERT INTO ENDERECO(logradouro, estado, complemento, bairro, cidade, numero, cep) VALUES('Rua Ali Pertin','Estado de Panico','Perto do rua fulano', 'Bairro das recaidas', 'Acabou as ideias', '144','36985541');

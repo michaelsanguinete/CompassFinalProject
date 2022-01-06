@@ -15,6 +15,6 @@ public class Animais {
 	private int id;
 	@Enumerated(EnumType.STRING)
 	private AnimaisEnum tipo;
-	private String raça;
+	private String raca;
 	private String cor;
 }
