@@ -2,7 +2,10 @@ package com.compass.finalproject.entity;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +32,9 @@ public class Denuncias {
 	private Animais tipoAnimal;
 	@OneToOne
 	private Endereco enderecoDenuncia;
+	@Enumerated(EnumType.STRING)
 	private StatusDenuncia status = StatusDenuncia.Aberto;
+	@Column(name = "DATACRIACAO")
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 
 }
