@@ -1,17 +1,18 @@
 package com.compass.finalproject.service;
 
-import java.util.List;
-
 import com.compass.finalproject.DTO.DenunciaDTO;
 import com.compass.finalproject.DTO.DenunciaFormDTO;
+import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
 import com.compass.finalproject.entity.AnimaisEnum;
+import com.compass.finalproject.entity.Denuncias;
 import com.compass.finalproject.entity.StatusDenuncia;
 import com.compass.finalproject.repository.DenunciaRepository;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DenunciaServiceImpl implements DenunciaService{
@@ -23,9 +24,11 @@ public class DenunciaServiceImpl implements DenunciaService{
     private ModelMapper modelMapper;
 
     @Override
-    public ResponseEntity<DenunciaDTO> save(DenunciaFormDTO formDTO) {
-        // TODO Auto-generated method stub
-        return null;
+    public ResponseEntity<DenunciaDTO> save(DenunciaSaveFormDTO formDTO) {
+        Denuncias denuncia = modelMapper.map(formDTO, Denuncias.class);
+        Denuncias denunciaSalva = this.denunciaRepository.save(denuncia);
+        System.out.println(denunciaSalva);
+        return ResponseEntity.ok().build();
     }
 
     @Override
