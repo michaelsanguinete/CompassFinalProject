@@ -53,6 +53,8 @@ public class DenunciaController {
         ResponseEntity<DenunciaDTO> denuncia = this.denunciaService.save(body);
         return ResponseEntity.ok(denuncia.getBody());
     }
+    
+    
 
 
 }
