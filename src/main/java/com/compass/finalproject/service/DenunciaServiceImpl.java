@@ -8,8 +8,6 @@ import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.compass.finalproject.DTO.DenunciaDTO;
-import com.compass.finalproject.DTO.DenunciaFormDTO;
 import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
 
 import com.compass.finalproject.entity.AnimaisEnum;
@@ -21,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class DenunciaServiceImpl implements DenunciaService{
@@ -60,8 +57,8 @@ public class DenunciaServiceImpl implements DenunciaService{
 
     @Override
     public ResponseEntity<?> delete(int id) {
-        // TODO Auto-generated method stub
-        return null;
+    	denunciaRepository.deleteById(id);
+    	return ResponseEntity.ok().build();
     }
 
     @Override
