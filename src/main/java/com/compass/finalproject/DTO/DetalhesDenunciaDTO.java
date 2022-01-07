@@ -35,35 +35,5 @@ public class DetalhesDenunciaDTO {
 
     public DetalhesDenunciaDTO(Denuncias denuncia){
 
-        this.id = denuncia.getId();
-        this.mensagem = denuncia.getMensagem();
-
-        if(denuncia.getDenunciante() != null){
-            this.nomeDenunciante = denuncia.getDenunciante().getNome();
-        }
-        if(denuncia.getOrgaoResponsavel() != null){
-            this.nomeOrgaoResponsavel = denuncia.getOrgaoResponsavel().getNome();
-        }
-
-        if(denuncia.getTipoAnimal() != null){
-            this.tipoAnimal = denuncia.getTipoAnimal().getTipo();
-            this.raca = denuncia.getTipoAnimal().getRaca();
-            this.cor = denuncia.getTipoAnimal().getCor();
-        }
-        
-        if(denuncia.getEnderecoDenuncia() != null){
-            this.logradouro = denuncia.getEnderecoDenuncia().getLogradouro();
-            this.numero = denuncia.getEnderecoDenuncia().getNumero();
-            this.complemento = denuncia.getEnderecoDenuncia().getComplemento();
-            this.bairro = denuncia.getEnderecoDenuncia().getBairro();
-            this.cidade = denuncia.getEnderecoDenuncia().getCidade();
-            this.estado = denuncia.getEnderecoDenuncia().getEstado();
-            this.cep = denuncia.getEnderecoDenuncia().getCep();
-        }
-
-        
-        this.statusDenuncia = denuncia.getStatus();
-        
-        this.dataCriacao = denuncia.getDataCriacao();
     }
-}
+}   

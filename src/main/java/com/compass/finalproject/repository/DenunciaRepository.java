@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface DenunciaRepository extends JpaRepository<Denuncias, Integer>{
 
-     List<Denuncias> findByTipoAnimal_Tipo(AnimaisEnum animal);
 }

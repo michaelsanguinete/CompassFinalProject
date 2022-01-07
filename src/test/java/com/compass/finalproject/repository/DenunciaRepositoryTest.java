@@ -22,13 +22,13 @@ public class DenunciaRepositoryTest {
     private DenunciaRepository denunciaRepository;
 
 
-    @Test
-    public  void deveriaEncontrarPeloMenosUmaDenunciaPorTipoAnimal(){
-        AnimaisEnum tipoAnimal = AnimaisEnum.Cachorro;
-        List<Denuncias> denuncia = denunciaRepository.findByTipoAnimal_Tipo(tipoAnimal);
-        System.out.println(denuncia);
-        Assert.assertNotNull(denuncia);
-    }
+    // @Test
+    // public  void deveriaEncontrarPeloMenosUmaDenunciaPorTipoAnimal(){
+    //     AnimaisEnum tipoAnimal = AnimaisEnum.Cachorro;
+    //     List<Denuncias> denuncia = denunciaRepository.findByTipoAnimal_Tipo(tipoAnimal);
+    //     System.out.println(denuncia);
+    //     Assert.assertNotNull(denuncia);
+    // }
 
 
 

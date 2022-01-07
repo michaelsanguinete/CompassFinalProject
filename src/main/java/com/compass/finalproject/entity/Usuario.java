@@ -21,7 +21,7 @@ public class Usuario {
 	private String telefone;
 	private String email;
 	private String senha;
-	@OneToMany(mappedBy = "denunciante")
+	@OneToMany(mappedBy = "denunciante_id")
 	private List<Denuncias> listaDenuncias = new ArrayList<Denuncias>();
 
 }
