@@ -16,45 +16,42 @@ import java.util.List;
 @RequestMapping("/denuncia")
 public class DenunciaController {
 
-    @Autowired
-    private DenunciaService denunciaService;
+	@Autowired
+	private DenunciaService denunciaService;
 
-    @GetMapping
-    @Transactional
-    public ResponseEntity<List<DetalhesDenunciaDTO>> listDenuncias (){
-        ResponseEntity<List<DetalhesDenunciaDTO>> denuncias = this.denunciaService.list();
-        return ResponseEntity.ok(denuncias.getBody());
-    }
+	@GetMapping
+	@Transactional
+	public ResponseEntity<List<DetalhesDenunciaDTO>> listDenuncias() {
+		ResponseEntity<List<DetalhesDenunciaDTO>> denuncias = this.denunciaService.list();
+		return ResponseEntity.ok(denuncias.getBody());
+	}
 
-    @GetMapping("/{id}")
-    @Transactional
-    public ResponseEntity<DenunciaDTO> getDenuncia (@PathVariable int id){
-        ResponseEntity<DenunciaDTO> denuncia = this.denunciaService.getDenuncia(id);
-        return ResponseEntity.ok(denuncia.getBody());
-    }
+	@GetMapping("/{id}")
+	@Transactional
+	public ResponseEntity<DenunciaDTO> getDenuncia(@PathVariable int id) {
+		ResponseEntity<DenunciaDTO> denuncia = this.denunciaService.getDenuncia(id);
+		return ResponseEntity.ok(denuncia.getBody());
+	}
 
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<?> deleteDenuncia(@PathVariable int id){
-        this.denunciaService.delete(id);
-        return ResponseEntity.ok().build();
-    }
+	@DeleteMapping("/{id}")
+	@Transactional
+	public ResponseEntity<?> deleteDenuncia(@PathVariable int id) {
+		return this.denunciaService.delete(id);
 
-    @PutMapping("/{id}")
-    @Transactional
-    public ResponseEntity<DenunciaDTO> updateDenuncia(@PathVariable int id, @RequestBody DenunciaFormDTO body){
-        ResponseEntity<DenunciaDTO> denuncia = this.denunciaService.update(id, body);
-        return  ResponseEntity.ok(denuncia.getBody());
-    }
+	}
 
-    @PostMapping
-    @Transactional
-    public ResponseEntity<DenunciaDTO> save(@RequestBody DenunciaSaveFormDTO body){
-        ResponseEntity<DenunciaDTO> denuncia = this.denunciaService.save(body);
-        return ResponseEntity.ok(denuncia.getBody());
-    }
-    
-    
+	@PutMapping("/{id}")
+	@Transactional
+	public ResponseEntity<DenunciaDTO> updateDenuncia(@PathVariable int id, @RequestBody DenunciaFormDTO body) {
+		ResponseEntity<DenunciaDTO> denuncia = this.denunciaService.update(id, body);
+		return ResponseEntity.ok(denuncia.getBody());
+	}
 
+	@PostMapping
+	@Transactional
+	public ResponseEntity<DenunciaDTO> save(@RequestBody DenunciaSaveFormDTO body) {
+		ResponseEntity<DenunciaDTO> denuncia = this.denunciaService.save(body);
+		return ResponseEntity.ok(denuncia.getBody());
+	}
 
 }
