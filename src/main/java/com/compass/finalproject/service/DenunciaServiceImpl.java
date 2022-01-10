@@ -12,7 +12,6 @@ import com.compass.finalproject.entity.Animais;
 import com.compass.finalproject.entity.AnimaisEnum;
 import com.compass.finalproject.entity.Denuncias;
 import com.compass.finalproject.entity.Endereco;
-import com.compass.finalproject.entity.OrgaoResponsavel;
 import com.compass.finalproject.entity.StatusDenuncia;
 import com.compass.finalproject.entity.Usuario;
 import com.compass.finalproject.repository.AnimaisRepository;
@@ -85,6 +84,7 @@ public class DenunciaServiceImpl implements DenunciaService {
 
 		//cria uma lista de detalhesDenunciaDTOs e adiciona todos os dados à ela
 		List<DetalhesDenunciaDTO> detalhesDenunciaDTOs = new ArrayList<>();
+
 		denuncias.forEach(de -> detalhesDenunciaDTOs.add(new DetalhesDenunciaDTO(de)));
 
 		return ResponseEntity.ok(detalhesDenunciaDTOs);
