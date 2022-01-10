@@ -6,6 +6,7 @@ import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
 import com.compass.finalproject.entity.Animais;
@@ -79,10 +80,10 @@ public class DenunciaServiceImpl implements DenunciaService {
 	@Override
 	public ResponseEntity<List<DetalhesDenunciaDTO>> list() {
 
-		//Recura todas as denuncias do banco de dados
+		// Recura todas as denuncias do banco de dados
 		List<Denuncias> denuncias = denunciaRepository.findAll();
 
-		//cria uma lista de detalhesDenunciaDTOs e adiciona todos os dados à ela
+		// cria uma lista de detalhesDenunciaDTOs e adiciona todos os dados à ela
 		List<DetalhesDenunciaDTO> detalhesDenunciaDTOs = new ArrayList<>();
 
 		denuncias.forEach(de -> detalhesDenunciaDTOs.add(new DetalhesDenunciaDTO(de)));
@@ -99,8 +100,13 @@ public class DenunciaServiceImpl implements DenunciaService {
 
 	@Override
 	public ResponseEntity<?> delete(int id) {
-		denunciaRepository.deleteById(id);
-		return ResponseEntity.ok().build();
+		Optional<Denuncias> optional = denunciaRepository.findById(id);
+		if (optional.isPresent()) {
+			denunciaRepository.deleteById(id);
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.notFound().build();
+
 	}
 
 	@Override
