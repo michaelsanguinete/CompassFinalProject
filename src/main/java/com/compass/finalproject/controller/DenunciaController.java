@@ -16,7 +16,8 @@ import java.util.List;
 @RequestMapping("/denuncia")
 public class DenunciaController {
 
-	@Autowired
+
+    @Autowired
 	private DenunciaService denunciaService;
 
 	@GetMapping
@@ -40,18 +41,18 @@ public class DenunciaController {
 
 	}
 
-	@PutMapping("/{id}")
-	@Transactional
-	public ResponseEntity<DenunciaDTO> updateDenuncia(@PathVariable int id, @RequestBody DenunciaFormDTO body) {
-		ResponseEntity<DenunciaDTO> denuncia = this.denunciaService.update(id, body);
-		return ResponseEntity.ok(denuncia.getBody());
-	}
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<DenunciaDTO> updateDenuncia(@PathVariable int id, @RequestBody DenunciaSaveFormDTO body){
+        return this.denunciaService.update(id, body);
+    }
 
-	@PostMapping
-	@Transactional
-	public ResponseEntity<DenunciaDTO> save(@RequestBody DenunciaSaveFormDTO body) {
-		ResponseEntity<DenunciaDTO> denuncia = this.denunciaService.save(body);
-		return ResponseEntity.ok(denuncia.getBody());
-	}
+    @PostMapping
+    @Transactional
+    public ResponseEntity<DenunciaDTO> save(@RequestBody DenunciaSaveFormDTO body){
+        return this.denunciaService.save(body);
+    }
+    
+    
 
 }
