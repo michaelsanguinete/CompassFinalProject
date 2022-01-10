@@ -1,6 +1,7 @@
 package com.compass.finalproject.DTO;
 
-import com.compass.finalproject.entity.*;
+import com.compass.finalproject.entity.Animais;
+import com.compass.finalproject.entity.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,11 +9,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DenunciaSaveFormDTO {
-
+public class DenunciaUpdateFormDTO {
+    private int id;
     private String mensagem;
     private int denunciante;
-    private Animais animal;
+    private Animais tipoAnimal;
     private Endereco enderecoDenuncia;
 
 }

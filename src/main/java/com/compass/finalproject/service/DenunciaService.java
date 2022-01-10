@@ -19,7 +19,7 @@ public interface DenunciaService {
 
     ResponseEntity<List<DetalhesDenunciaDTO>> list();
 
-    ResponseEntity<DenunciaDTO> update(int id, DenunciaFormDTO formDTO);
+    ResponseEntity<DenunciaDTO> update(int id, DenunciaSaveFormDTO formDTO);
 
     ResponseEntity<?> delete(int id);
 

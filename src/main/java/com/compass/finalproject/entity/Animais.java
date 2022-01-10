@@ -17,6 +17,4 @@ public class Animais {
 	private AnimaisEnum tipo;
 	private String raca;
 	private String cor;
-	@OneToOne
-	private Denuncias denuncia;
 }
