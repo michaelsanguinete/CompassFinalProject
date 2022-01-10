@@ -50,8 +50,8 @@ public class DenunciaController {
     @PostMapping
     @Transactional
     public ResponseEntity<DenunciaDTO> save(@RequestBody DenunciaSaveFormDTO body){
-        ResponseEntity<DenunciaDTO> denuncia = this.denunciaService.save(body);
-        return ResponseEntity.ok(denuncia.getBody());
+        DenunciaDTO denuncia = this.denunciaService.save(body);
+        return ResponseEntity.ok(denuncia);
     }
     
     

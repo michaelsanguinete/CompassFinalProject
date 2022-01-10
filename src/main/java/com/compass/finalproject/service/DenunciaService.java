@@ -15,7 +15,7 @@ import java.util.List;
 
 public interface DenunciaService {
     
-    ResponseEntity<DenunciaDTO> save(DenunciaSaveFormDTO formDTO);
+    DenunciaDTO save(DenunciaSaveFormDTO formDTO);
 
     ResponseEntity<List<DetalhesDenunciaDTO>> list();
 

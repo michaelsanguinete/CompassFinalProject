@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
-import com.compass.finalproject.entity.Animais;
-import com.compass.finalproject.entity.AnimaisEnum;
-import com.compass.finalproject.entity.Denuncias;
-import com.compass.finalproject.entity.StatusDenuncia;
+import com.compass.finalproject.entity.*;
+import com.compass.finalproject.repository.AnimaisRepository;
 import com.compass.finalproject.repository.DenunciaRepository;
+import com.compass.finalproject.repository.EnderecoRepository;
+import com.compass.finalproject.repository.UsuarioRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +27,49 @@ public class DenunciaServiceImpl implements DenunciaService{
     DenunciaRepository denunciaRepository;
 
     @Autowired
+    EnderecoRepository enderecoRepository;
+
+    @Autowired
+    AnimaisRepository animaisRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
-    public ResponseEntity<DenunciaDTO> save(DenunciaSaveFormDTO formDTO) {
-        Denuncias denuncia = modelMapper.map(formDTO, Denuncias.class);
-        Denuncias denunciaSalva = this.denunciaRepository.save(denuncia);
-        System.out.println(denunciaSalva);
-        return ResponseEntity.ok().build();
+    public DenunciaDTO save(DenunciaSaveFormDTO formDTO) {
+
+        try {
+            // Salva o Endereco no bando de dados
+            Endereco enderecoDenuncia = this.enderecoRepository.save(
+                    modelMapper.map(formDTO.getEnderecoDenuncia(), Endereco.class)
+            );
+
+            // Salva animal no banco
+            Animais animalSalvo = this.animaisRepository.save(
+                    modelMapper.map(formDTO.getTipo_animal(), Animais.class)
+            );
+
+            // Busca informações do usuário no banco
+            Usuario usuario = this.usuarioRepository.getById(formDTO.getDenunciante_id());
+
+            // Atribui informações de Endereço Tipo de Animal e Usuario a denúncia
+            Denuncias denuncia = modelMapper.map(formDTO, Denuncias.class);
+            denuncia.setEnderecoDenuncia(enderecoDenuncia);
+            denuncia.setAnimal(animalSalvo);
+            denuncia.setDenunciante(usuario);
+
+            // Salva Denuncia no banco
+            Denuncias denunciaSalva = this.denunciaRepository.save(denuncia);
+
+            return modelMapper.map(denunciaSalva, DenunciaDTO.class);
+
+        } catch (Exception e){
+            e.printStackTrace();  // Método temporário
+            throw new RuntimeException(); // Método temporário
+        }
     }
 
     @Override
