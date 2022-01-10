@@ -1,6 +1,5 @@
 package com.compass.finalproject.service;
 
-
 import com.compass.finalproject.DTO.DenunciaDTO;
 import com.compass.finalproject.DTO.DenunciaFormDTO;
 import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
@@ -27,85 +26,104 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-
 @Service
-public class DenunciaServiceImpl implements DenunciaService{
+public class DenunciaServiceImpl implements DenunciaService {
 
-    @Autowired
-    DenunciaRepository denunciaRepository;
+	@Autowired
+	DenunciaRepository denunciaRepository;
 
-    @Autowired
-    AnimaisRepository animaisRepository;
+	@Autowired
+	AnimaisRepository animaisRepository;
 
-    @Autowired
-    UsuarioRepository usuarioRepository;
+	@Autowired
+	UsuarioRepository usuarioRepository;
 
-    @Autowired
-    EnderecoRepository enderecoRepository;
+	@Autowired
+	EnderecoRepository enderecoRepository;
 
-    @Autowired
-    OrgaoReponsavelRepository orgaoReponsavelRepository;
+	@Autowired
+	OrgaoReponsavelRepository orgaoReponsavelRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
+	@Autowired
+	private ModelMapper modelMapper;
 
-    @Override
-    public ResponseEntity<DenunciaDTO> save(DenunciaSaveFormDTO formDTO) {
-        Denuncias denuncia = modelMapper.map(formDTO, Denuncias.class);
-        Denuncias denunciaSalva = this.denunciaRepository.save(denuncia);
-        System.out.println(denunciaSalva);
-        return ResponseEntity.ok().build();
-    }
+	@Override
+	public ResponseEntity<DenunciaDTO> save(DenunciaSaveFormDTO formDTO) {
+		try {
+			// Salva o Endereco no bando de dados
+			Endereco enderecoDenuncia = this.enderecoRepository
+					.save(modelMapper.map(formDTO.getEnderecoDenuncia(), Endereco.class));
 
-    @Override
-    public ResponseEntity<List<DetalhesDenunciaDTO>> list() {
-        
-        List<Denuncias> denuncias = denunciaRepository.findAll();
-        List<Animais> animais = animaisRepository.findAll();
-        List<Usuario> usuarios = usuarioRepository.findAll();
-        List<Endereco> enderecos = enderecoRepository.findAll();
-        List<OrgaoResponsavel> orgaoResponsaveis = orgaoReponsavelRepository.findAll();
+			// Salva animal no banco
+			Animais animalSalvo = this.animaisRepository.save(modelMapper.map(formDTO.getTipoAnimal(), Animais.class));
 
-        List<DetalhesDenunciaDTO> detalhesDenunciaDTOs = new ArrayList<>();
+			// Busca informações do usuário no banco
+			Usuario usuario = this.usuarioRepository.getById(formDTO.getDenunciante());
 
-        denuncias.forEach(de ->
-            detalhesDenunciaDTOs.add(new DetalhesDenunciaDTO(de, animais.get(de.getTipo_animal_id())
-            , enderecos.get(de.getEndereco_denuncia_id())
-            , orgaoResponsaveis.get(de.getOrgao_responsavel_id())
-            , usuarios.get(de.getDenunciante_id())))  
-        );
+			// Atribui informações de Endereço Tipo de Animal e Usuario a denúncia
+			Denuncias denuncia = modelMapper.map(formDTO, Denuncias.class);
+			denuncia.setEnderecoDenuncia(enderecoDenuncia);
+			denuncia.setAnimal(animalSalvo);
+			denuncia.setDenunciante(usuario);
 
-        return ResponseEntity.ok(detalhesDenunciaDTOs);
-    }
+			// Salva Denuncia no banco
+			Denuncias denunciaSalva = this.denunciaRepository.save(denuncia);
 
-    @Override
-    public ResponseEntity<DenunciaDTO> update(int id, DenunciaFormDTO formDTO) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+			return ResponseEntity.ok().build();
 
-    @Override
-    public ResponseEntity<?> delete(int id) {
-    	denunciaRepository.deleteById(id);
-    	return ResponseEntity.ok().build();
-    }
+		} catch (Exception e) {
+			e.printStackTrace(); // Método temporário
+			throw new RuntimeException(); // Método temporário
+		}
+	}
 
-    @Override
-    public ResponseEntity<DenunciaDTO> getDenuncia(int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	@Override
+	public ResponseEntity<List<DetalhesDenunciaDTO>> list() {
 
-    @Override
-    public ResponseEntity<List<DenunciaDTO>> listAnimais(AnimaisEnum tipoAnimal) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+		List<Denuncias> denuncias = denunciaRepository.findAll();
+		List<Animais> animais = animaisRepository.findAll();
+		List<Usuario> usuarios = usuarioRepository.findAll();
+		List<Endereco> enderecos = enderecoRepository.findAll();
+		List<OrgaoResponsavel> orgaoResponsaveis = orgaoReponsavelRepository.findAll();
 
-    @Override
-    public ResponseEntity<StatusDenuncia> listStatus(int id) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
+		List<DetalhesDenunciaDTO> detalhesDenunciaDTOs = new ArrayList<>();
+
+		denuncias.forEach(de -> detalhesDenunciaDTOs.add(new DetalhesDenunciaDTO(de,
+				animais.get(de.getAnimal().getId()), enderecos.get(de.getEnderecoDenuncia().getId()),
+				orgaoResponsaveis.get(de.getOrgaoResponsavel().getId()), usuarios.get(de.getDenunciante().getId()))));
+
+		return ResponseEntity.ok(detalhesDenunciaDTOs);
+
+	}
+
+	@Override
+	public ResponseEntity<DenunciaDTO> update(int id, DenunciaFormDTO formDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<?> delete(int id) {
+		denunciaRepository.deleteById(id);
+		return ResponseEntity.ok().build();
+	}
+
+	@Override
+	public ResponseEntity<DenunciaDTO> getDenuncia(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<List<DenunciaDTO>> listAnimais(AnimaisEnum tipoAnimal) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<StatusDenuncia> listStatus(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

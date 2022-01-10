@@ -15,10 +15,14 @@ public class Denuncias {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String mensagem;
-	private int denunciante_id;
-	private int orgao_responsavel_id;
-	private int tipo_animal_id;
-	private int endereco_denuncia_id;
+	@ManyToOne
+	private Usuario denunciante;
+	@ManyToOne
+	private OrgaoResponsavel orgaoResponsavel;
+	@OneToOne
+	private Animais animal;
+	@OneToOne
+	private Endereco enderecoDenuncia;
 	@Enumerated(EnumType.STRING)
 	private StatusDenuncia status = StatusDenuncia.Aberto;
 	@Column(name = "DATACRIACAO")

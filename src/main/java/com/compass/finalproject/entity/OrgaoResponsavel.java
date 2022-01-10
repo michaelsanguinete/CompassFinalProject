@@ -19,7 +19,7 @@ public class OrgaoResponsavel {
 	@OneToOne
 	private Endereco endereco;
 	private String telefone;
-	@OneToMany(mappedBy = "orgao_responsavel_id")
+	@OneToMany
 	private List<Denuncias> listaDenuncias;
 	private String email;
 	private String senha;

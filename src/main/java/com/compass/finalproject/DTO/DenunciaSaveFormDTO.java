@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 public class DenunciaSaveFormDTO {
 
     private String mensagem;
-    private Usuario denunciante;
+    private int denunciante;
     private Animais tipoAnimal;
     private Endereco enderecoDenuncia;
-    private StatusDenuncia status;
 
 }
