@@ -37,25 +37,29 @@ public class DetalhesDenunciaDTO {
     private LocalDateTime dataCriacao;
 
 
-    public DetalhesDenunciaDTO(Denuncias denuncia, Animais animais, Endereco endereco, OrgaoResponsavel orgaoResponsavel, Usuario usuario){
+    public DetalhesDenunciaDTO(Denuncias denuncia){
 
         this.id = denuncia.getId();
         this.mensagem = denuncia.getMensagem();
 
-        this.nomeDenunciante = usuario.getNome();
-        this.nomeOrgaoResponsavel = orgaoResponsavel.getNome();
+        if(denuncia.getDenunciante() != null){
+            this.nomeDenunciante = denuncia.getDenunciante().getNome();
+        }
+       if(denuncia.getOrgaoResponsavel()!= null){
+        this.nomeOrgaoResponsavel = denuncia.getOrgaoResponsavel().getNome();
+       }
 
-        this.tipoAnimal = animais.getTipo();
-        this.raca = animais.getRaca();
-        this.cor = animais.getCor();
+        this.tipoAnimal = denuncia.getAnimal().getTipo();
+        this.raca = denuncia.getAnimal().getRaca();
+        this.cor = denuncia.getAnimal().getCor();
 
-        this.logradouro = endereco.getLogradouro();
-        this.numero = endereco.getNumero();
-        this.complemento = endereco.getComplemento();
-        this.bairro = endereco.getBairro();
-        this.cidade = endereco.getCidade();
-        this.estado = endereco.getEstado();
-        this.cep = endereco.getCep();
+        this.logradouro = denuncia.getEnderecoDenuncia().getLogradouro();
+        this.numero = denuncia.getEnderecoDenuncia().getNumero();
+        this.complemento = denuncia.getEnderecoDenuncia().getComplemento();
+        this.bairro = denuncia.getEnderecoDenuncia().getBairro();
+        this.cidade = denuncia.getEnderecoDenuncia().getCidade();
+        this.estado = denuncia.getEnderecoDenuncia().getEstado();
+        this.cep = denuncia.getEnderecoDenuncia().getCep();
 
         this.statusDenuncia = denuncia.getStatus();
 

@@ -12,7 +12,6 @@ import com.compass.finalproject.entity.Animais;
 import com.compass.finalproject.entity.AnimaisEnum;
 import com.compass.finalproject.entity.Denuncias;
 import com.compass.finalproject.entity.Endereco;
-import com.compass.finalproject.entity.OrgaoResponsavel;
 import com.compass.finalproject.entity.StatusDenuncia;
 import com.compass.finalproject.entity.Usuario;
 import com.compass.finalproject.repository.AnimaisRepository;
@@ -80,17 +79,13 @@ public class DenunciaServiceImpl implements DenunciaService {
 	@Override
 	public ResponseEntity<List<DetalhesDenunciaDTO>> list() {
 
+		//Recura todas as denuncias do banco de dados
 		List<Denuncias> denuncias = denunciaRepository.findAll();
-		List<Animais> animais = animaisRepository.findAll();
-		List<Usuario> usuarios = usuarioRepository.findAll();
-		List<Endereco> enderecos = enderecoRepository.findAll();
-		List<OrgaoResponsavel> orgaoResponsaveis = orgaoReponsavelRepository.findAll();
 
+		//cria uma lista de detalhesDenunciaDTOs e adiciona todos os dados à ela
 		List<DetalhesDenunciaDTO> detalhesDenunciaDTOs = new ArrayList<>();
 
-		denuncias.forEach(de -> detalhesDenunciaDTOs.add(new DetalhesDenunciaDTO(de,
-				animais.get(de.getAnimal().getId()), enderecos.get(de.getEnderecoDenuncia().getId()),
-				orgaoResponsaveis.get(de.getOrgaoResponsavel().getId()), usuarios.get(de.getDenunciante().getId()))));
+		denuncias.forEach(de -> detalhesDenunciaDTOs.add(new DetalhesDenunciaDTO(de)));
 
 		return ResponseEntity.ok(detalhesDenunciaDTOs);
 
