@@ -118,7 +118,8 @@ public class DenunciaServiceImpl implements DenunciaService {
 				// Atualizando denúncia
 				denuncia.get().setEnderecoDenuncia(endereco.get());
 				denuncia.get().setAnimal(animal.get());
-				return ResponseEntity.ok().build();
+
+				return ResponseEntity.ok(modelMapper.map(denuncia.get(), DenunciaDTO.class));
 			}
 			return ResponseEntity.badRequest().build();      // Método temporário
 		}
