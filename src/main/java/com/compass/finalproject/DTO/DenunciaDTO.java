@@ -15,7 +15,7 @@ public class DenunciaDTO {
     private String mensagem;
     private Usuario denunciante;
     private OrgaoResponsavel orgaoResponsavel;
-    private Animais tipoAnimal;
+    private Animais animal;
     private Endereco enderecoDenuncia;
     private StatusDenuncia status;
     private LocalDateTime dataCriacao;
