@@ -140,8 +140,11 @@ public class DenunciaServiceImpl implements DenunciaService {
 
 	@Override
 	public ResponseEntity<DenunciaDTO> getDenuncia(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Denuncias> dOptional = denunciaRepository.findById(id);
+		if(dOptional.isPresent()){
+			return ResponseEntity.ok(modelMapper.map(dOptional.get(), DenunciaDTO.class));
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 	@Override

@@ -23,15 +23,13 @@ public class DenunciaController {
 	@GetMapping
 	@Transactional
 	public ResponseEntity<List<DetalhesDenunciaDTO>> listDenuncias() {
-		ResponseEntity<List<DetalhesDenunciaDTO>> denuncias = this.denunciaService.list();
-		return ResponseEntity.ok(denuncias.getBody());
+		return this.denunciaService.list();
 	}
 
 	@GetMapping("/{id}")
 	@Transactional
 	public ResponseEntity<DenunciaDTO> getDenuncia(@PathVariable int id) {
-		ResponseEntity<DenunciaDTO> denuncia = this.denunciaService.getDenuncia(id);
-		return ResponseEntity.ok(denuncia.getBody());
+		return this.denunciaService.getDenuncia(id);
 	}
 
 	@DeleteMapping("/{id}")
