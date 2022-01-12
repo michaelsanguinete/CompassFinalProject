@@ -1,5 +1,6 @@
 package com.compass.finalproject.repository;
 
+
 import com.compass.finalproject.entity.Animais;
 import com.compass.finalproject.entity.AnimaisEnum;
 import com.compass.finalproject.entity.Denuncias;
