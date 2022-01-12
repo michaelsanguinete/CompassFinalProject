@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrgaoResponsavelFormDTO {
-    private int id;
 	private String nome;
 	private Endereco endereco;
 	private String telefone;
