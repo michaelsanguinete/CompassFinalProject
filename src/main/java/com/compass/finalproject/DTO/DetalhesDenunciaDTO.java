@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import com.compass.finalproject.entity.AnimaisEnum;
 import com.compass.finalproject.entity.Denuncias;
 import com.compass.finalproject.entity.StatusDenuncia;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
@@ -29,7 +30,7 @@ public class DetalhesDenunciaDTO {
     private int cep;
 
     private StatusDenuncia statusDenuncia;
-
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss", shape = JsonFormat.Shape.STRING)
     private LocalDateTime dataCriacao;
 
 
