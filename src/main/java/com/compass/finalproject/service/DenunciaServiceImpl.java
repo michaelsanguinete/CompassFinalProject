@@ -26,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 public class DenunciaServiceImpl implements DenunciaService {
@@ -77,18 +78,34 @@ public class DenunciaServiceImpl implements DenunciaService {
 	}
 
 	@Override
-	public ResponseEntity<List<DetalhesDenunciaDTO>> list() {
+	public ResponseEntity<List<DetalhesDenunciaDTO>> list(String tipoAnimal) {
+		// Lista completa de denuncias
+		if (tipoAnimal == null) {
+			// Recura todas as denuncias do banco de dados
+			List<Denuncias> denuncias = denunciaRepository.findAll();
 
-		// Recura todas as denuncias do banco de dados
-		List<Denuncias> denuncias = denunciaRepository.findAll();
+			// cria uma lista de detalhesDenunciaDTOs e adiciona todos os dados à ela
+			List<DetalhesDenunciaDTO> detalhesDenunciaDTOs = new ArrayList<>();
 
-		// cria uma lista de detalhesDenunciaDTOs e adiciona todos os dados à ela
-		List<DetalhesDenunciaDTO> detalhesDenunciaDTOs = new ArrayList<>();
+			denuncias.forEach(de -> detalhesDenunciaDTOs.add(new DetalhesDenunciaDTO(de)));
 
-		denuncias.forEach(de -> detalhesDenunciaDTOs.add(new DetalhesDenunciaDTO(de)));
+			return ResponseEntity.ok(detalhesDenunciaDTOs);
+		} else {
+			tipoAnimal = StringUtils.capitalize(tipoAnimal); // Primeira letra da string maiúscula
+			AnimaisEnum animalEnum = modelMapper.map(tipoAnimal, AnimaisEnum.class);
 
-		return ResponseEntity.ok(detalhesDenunciaDTOs);
-
+			// Busca os IDs de animais relacionados com o tipo informado:
+			Optional<List<Animais>> animais = animaisRepository.findByTipoEquals(animalEnum);
+			if (animais.get().size()>0){
+				List<DetalhesDenunciaDTO> denuncias = new ArrayList<>();
+				animais.get().forEach( animal -> {
+					denuncias.add(new DetalhesDenunciaDTO(
+							denunciaRepository.findByAnimalIdEquals(animal.getId()).get()));
+				});
+				return ResponseEntity.ok(denuncias);
+			}
+			return  ResponseEntity.notFound().build();
+		}
 	}
 
 	@Override
@@ -145,12 +162,6 @@ public class DenunciaServiceImpl implements DenunciaService {
 			return ResponseEntity.ok(modelMapper.map(dOptional.get(), DenunciaDTO.class));
 		}
 		return ResponseEntity.notFound().build();
-	}
-
-	@Override
-	public ResponseEntity<List<DenunciaDTO>> listAnimais(AnimaisEnum tipoAnimal) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
