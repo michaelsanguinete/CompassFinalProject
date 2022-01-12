@@ -16,15 +16,13 @@ public interface DenunciaService {
     
     ResponseEntity<DenunciaDTO> save(DenunciaSaveFormDTO formDTO);
 
-    ResponseEntity<List<DetalhesDenunciaDTO>> list();
+    ResponseEntity<List<DetalhesDenunciaDTO>> list(String tipoAnimal);
 
     ResponseEntity<DenunciaDTO> update(int id, DenunciaSaveFormDTO formDTO);
 
     ResponseEntity<?> delete(int id);
 
     ResponseEntity<DenunciaDTO> getDenuncia(int id);
-
-    ResponseEntity<List<DenunciaDTO>> listAnimais(AnimaisEnum tipoAnimal);
 
     ResponseEntity<StatusDenuncia> listStatus(int id);
 

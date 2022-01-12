@@ -21,8 +21,8 @@ public class DenunciaController {
 
 	@GetMapping
 	@Transactional
-	public ResponseEntity<List<DetalhesDenunciaDTO>> listDenuncias() {
-		return this.denunciaService.list();
+	public ResponseEntity<List<DetalhesDenunciaDTO>> listDenuncias(@RequestParam(required = false) String tipoAnimal) {
+		return this.denunciaService.list(tipoAnimal);
 	}
 
 	@GetMapping("/{id}")
