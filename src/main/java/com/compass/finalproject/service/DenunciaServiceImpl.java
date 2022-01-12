@@ -23,6 +23,7 @@ import com.compass.finalproject.repository.UsuarioRepository;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -68,7 +69,7 @@ public class DenunciaServiceImpl implements DenunciaService {
 
 			// Salva Denuncia no banco
 			this.denunciaRepository.save(denuncia);
-			return ResponseEntity.ok().build();
+			return ResponseEntity.status(HttpStatus.CREATED).build();
 		} catch (Exception e) {
 			e.printStackTrace(); // Método temporário
 			return ResponseEntity.internalServerError().build(); // Método temporário
