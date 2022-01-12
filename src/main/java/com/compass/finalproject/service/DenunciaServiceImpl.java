@@ -1,7 +1,6 @@
 package com.compass.finalproject.service;
 
 import com.compass.finalproject.DTO.DenunciaDTO;
-import com.compass.finalproject.DTO.DenunciaFormDTO;
 import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
 
 import java.util.ArrayList;

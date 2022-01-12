@@ -7,7 +7,6 @@ import com.compass.finalproject.entity.Endereco;
 import com.compass.finalproject.entity.Usuario;
 
 import org.junit.Test;
-import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -18,7 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -53,7 +51,7 @@ public class DenunciaRepositoryTest {
 
         Usuario usuario = new Usuario();
         usuario.setNome("Ronaldo Fenomeno");
-        usuario.setEndereco(endereco);
+        usuario.setEnderecoUsuario(endereco);
         usuario.setTelefone("319988989");
         usuario.setEmail("email@email.com");
         usuario.setSenha("uifusof");
@@ -89,7 +87,7 @@ public class DenunciaRepositoryTest {
 
         Usuario usuario = new Usuario();
         usuario.setNome("Ronaldo Fenomeno");
-        usuario.setEndereco(endereco);
+        usuario.setEnderecoUsuario(endereco);
         usuario.setTelefone("319988989");
         usuario.setEmail("email@email.com");
         usuario.setSenha("uifusof");

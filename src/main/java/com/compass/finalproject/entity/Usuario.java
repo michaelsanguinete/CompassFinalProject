@@ -17,7 +17,7 @@ public class Usuario {
 	private int id;
 	private String nome;
 	@OneToOne
-	private Endereco endereco;
+	private Endereco enderecoUsuario;
 	private String telefone;
 	private String email;
 	private String senha;

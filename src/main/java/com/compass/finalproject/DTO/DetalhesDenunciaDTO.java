@@ -2,13 +2,9 @@ package com.compass.finalproject.DTO;
 
 import java.time.LocalDateTime;
 
-import com.compass.finalproject.entity.Animais;
 import com.compass.finalproject.entity.AnimaisEnum;
 import com.compass.finalproject.entity.Denuncias;
-import com.compass.finalproject.entity.Endereco;
-import com.compass.finalproject.entity.OrgaoResponsavel;
 import com.compass.finalproject.entity.StatusDenuncia;
-import com.compass.finalproject.entity.Usuario;
 
 import lombok.Data;
 
