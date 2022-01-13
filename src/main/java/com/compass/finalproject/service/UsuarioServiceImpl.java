@@ -1,5 +1,7 @@
 package com.compass.finalproject.service;
 
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +23,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	EnderecoRepository enderecoRepository;
-
+	
 	@Autowired
 	ModelMapper modelMapper;
 
@@ -33,6 +35,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Usuario usuario = modelMapper.map(formDTO, Usuario.class);
 		usuario.setEnderecoUsuario(enderecoUsuario);
 		usuarioRepository.save(usuario);
+	
 
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 		}
@@ -44,8 +47,26 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public ResponseEntity<UsuarioDTO> update(int id, UsuarioFormDTO formDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Usuario> usuario = this.usuarioRepository.findById(id);
+		if (usuario.get().getId() != 0) {
+			Optional<Endereco> endereco = this.enderecoRepository.findById(usuario.get().getEnderecoUsuario().getId());
+			endereco.get().setBairro(formDTO.getEnderecoUsuario().getBairro());
+			endereco.get().setCep(formDTO.getEnderecoUsuario().getCep());
+			endereco.get().setCidade(formDTO.getEnderecoUsuario().getCidade());
+			endereco.get().setComplemento(formDTO.getEnderecoUsuario().getComplemento());
+			endereco.get().setEstado(formDTO.getEnderecoUsuario().getEstado());
+			endereco.get().setLogradouro(formDTO.getEnderecoUsuario().getLogradouro());
+			endereco.get().setNumero(formDTO.getEnderecoUsuario().getNumero());
+			
+			usuario.get().setEmail(formDTO.getEmail());
+			usuario.get().setNome(formDTO.getNome());
+			usuario.get().setSenha(formDTO.getSenha());
+			usuario.get().setTelefone(formDTO.getTelefone());
+			
+			return ResponseEntity.status(HttpStatus.CREATED).build();
+		}else {
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 }
