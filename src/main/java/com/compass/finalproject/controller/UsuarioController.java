@@ -28,7 +28,7 @@ public class UsuarioController {
 		return this.usuarioService.save(body);
 	}
 	
-	@PutMapping
+	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<UsuarioDTO> update (@PathVariable int id, @RequestBody UsuarioFormDTO body){
 		return this.usuarioService.update(id, body);
