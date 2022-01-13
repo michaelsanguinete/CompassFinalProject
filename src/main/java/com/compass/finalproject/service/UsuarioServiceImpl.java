@@ -61,7 +61,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public ResponseEntity<UsuarioDTO> update(int id, UsuarioFormDTO formDTO) {
 		Optional<Usuario> usuario = this.usuarioRepository.findById(id);
-		if (usuario.get().getId() != 0) {
+		if (usuario.isPresent()) {
 			Optional<Endereco> endereco = this.enderecoRepository.findById(usuario.get().getEnderecoUsuario().getId());
 			endereco.get().setBairro(formDTO.getEnderecoUsuario().getBairro());
 			endereco.get().setCep(formDTO.getEnderecoUsuario().getCep());
