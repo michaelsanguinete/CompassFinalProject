@@ -165,8 +165,13 @@ public class DenunciaServiceImpl implements DenunciaService {
 
 	@Override
 	public ResponseEntity<StatusDenuncia> listStatus(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Denuncias> dOptional = denunciaRepository.findById(id);
+		if(dOptional.isPresent()){
+
+			return ResponseEntity.ok(dOptional.get().getStatus());
+		}
+
+		return ResponseEntity.notFound().build();
 	}
 
 }
