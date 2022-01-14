@@ -6,6 +6,7 @@ import com.compass.finalproject.DTO.OrgaoResponsavelFormDTO;
 import com.compass.finalproject.entity.Denuncias;
 import com.compass.finalproject.entity.Endereco;
 import com.compass.finalproject.entity.OrgaoResponsavel;
+import com.compass.finalproject.exceptions.ExceptionResponse;
 import com.compass.finalproject.repository.EnderecoRepository;
 import com.compass.finalproject.repository.OrgaoReponsavelRepository;
 
@@ -43,9 +44,9 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
             // Salva Orgão responsável no banco
             this.orgaoReponsavelRepository.save(orgaoResponsavel);
             return ResponseEntity.status(HttpStatus.CREATED).build();
+        
         } catch (Exception e){
-            e.printStackTrace(); // Método temporário
-            return ResponseEntity.internalServerError().build(); // Método temporário
+            throw new ExceptionResponse();
         }
     }
 
@@ -57,29 +58,34 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
 
     @Override
     public ResponseEntity<OrgaoResponsavelDTO> uptadeOrgaoResponsavel(int id, OrgaoResponsavelFormDTO body) {
-        Optional<OrgaoResponsavel> orgaoResponsavel = this.orgaoReponsavelRepository.findById(id);
-        if (orgaoResponsavel.isPresent()){
-            Optional<Endereco> endereco = this.enderecoRepository.findById(
-                    orgaoResponsavel.get().getEndereco().getId());
+        try {
+            Optional<OrgaoResponsavel> orgaoResponsavel = this.orgaoReponsavelRepository.findById(id);
+            if (orgaoResponsavel.isPresent()){
+                Optional<Endereco> endereco = this.enderecoRepository.findById(
+                        orgaoResponsavel.get().getEndereco().getId());
 
-            // Alterando dados do endereço
-            endereco.get().setNumero(body.getEndereco().getNumero());
-            endereco.get().setLogradouro(body.getEndereco().getLogradouro());
-            endereco.get().setEstado(body.getEndereco().getEstado());
-            endereco.get().setComplemento(body.getEndereco().getComplemento());
-            endereco.get().setBairro(body.getEndereco().getBairro());
-            endereco.get().setCidade(body.getEndereco().getCidade());
-            endereco.get().setCep(body.getEndereco().getCep());
+                // Alterando dados do endereço
+                endereco.get().setNumero(body.getEndereco().getNumero());
+                endereco.get().setLogradouro(body.getEndereco().getLogradouro());
+                endereco.get().setEstado(body.getEndereco().getEstado());
+                endereco.get().setComplemento(body.getEndereco().getComplemento());
+                endereco.get().setBairro(body.getEndereco().getBairro());
+                endereco.get().setCidade(body.getEndereco().getCidade());
+                endereco.get().setCep(body.getEndereco().getCep());
 
-            // Alterando dados do orgão responsável
-            orgaoResponsavel.get().setEmail(body.getEmail());
-            orgaoResponsavel.get().setSenha(body.getSenha());
-            orgaoResponsavel.get().setTelefone(body.getTelefone());
-            orgaoResponsavel.get().setNome(body.getNome());
+                // Alterando dados do orgão responsável
+                orgaoResponsavel.get().setEmail(body.getEmail());
+                orgaoResponsavel.get().setSenha(body.getSenha());
+                orgaoResponsavel.get().setTelefone(body.getTelefone());
+                orgaoResponsavel.get().setNome(body.getNome());
 
-            return ResponseEntity.ok(modelMapper.map(orgaoResponsavel.get(), OrgaoResponsavelDTO.class));
+                return ResponseEntity.ok(modelMapper.map(orgaoResponsavel.get(), OrgaoResponsavelDTO.class));
+            }
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            throw new ExceptionResponse();
+        }    
+            
         }
-        return ResponseEntity.notFound().build();
-    }
     
 }
