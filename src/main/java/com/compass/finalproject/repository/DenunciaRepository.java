@@ -13,4 +13,5 @@ public interface DenunciaRepository extends JpaRepository<Denuncias, Integer>{
 
     Optional<Denuncias> findByAnimalIdEquals(int id);
 
+    Optional<List<Denuncias>> findByDenuncianteIdEquals(int id);
 }

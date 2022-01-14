@@ -3,6 +3,7 @@ package com.compass.finalproject.controller;
 import com.compass.finalproject.DTO.DenunciaDTO;
 import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
 import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
+import com.compass.finalproject.entity.StatusDenuncia;
 import com.compass.finalproject.service.DenunciaService;
 import com.compass.finalproject.service.OrgaoResponsavelService;
 import com.compass.finalproject.service.UsuarioService;
@@ -55,10 +56,20 @@ public class DenunciaController {
         return this.denunciaService.save(body);
     }
 
+
 	@PutMapping("/alterarStatus/{id}")
 	@Transactional
 	public ResponseEntity<?> alterarStatusID(@PathVariable int id){
 		return this.orgaoResponsavelService.alteraStatusDenuncia(id);
 	}
+
+	@GetMapping("/status/{id}")
+	@Transactional
+	public ResponseEntity<StatusDenuncia> listStatus(@PathVariable int id){
+		return this.denunciaService.listStatus(id);
+	}
+    
+    
+
 
 }
