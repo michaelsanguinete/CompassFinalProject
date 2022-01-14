@@ -14,6 +14,7 @@ import com.compass.finalproject.entity.Denuncias;
 import com.compass.finalproject.entity.Endereco;
 import com.compass.finalproject.entity.StatusDenuncia;
 import com.compass.finalproject.entity.Usuario;
+import com.compass.finalproject.exceptions.ExceptionResponse;
 import com.compass.finalproject.repository.AnimaisRepository;
 import com.compass.finalproject.repository.DenunciaRepository;
 import com.compass.finalproject.repository.EnderecoRepository;
@@ -78,33 +79,43 @@ public class DenunciaServiceImpl implements DenunciaService {
 
 	@Override
 	public ResponseEntity<List<DetalhesDenunciaDTO>> list(String tipoAnimal) {
-		// Lista completa de denuncias
-		if (tipoAnimal == null) {
-			// Recura todas as denuncias do banco de dados
-			List<Denuncias> denuncias = denunciaRepository.findAll();
+			// Lista completa de denuncias
+			if (tipoAnimal == null) {
+				try {
+					// Recupera todas as denuncias do banco de dados
+					List<Denuncias> denuncias = denunciaRepository.findAll();
 
-			// cria uma lista de detalhesDenunciaDTOs e adiciona todos os dados à ela
-			List<DetalhesDenunciaDTO> detalhesDenunciaDTOs = new ArrayList<>();
+					// cria uma lista de detalhesDenunciaDTOs e adiciona todos os dados à ela
+					List<DetalhesDenunciaDTO> detalhesDenunciaDTOs = new ArrayList<>();
 
-			denuncias.forEach(de -> detalhesDenunciaDTOs.add(new DetalhesDenunciaDTO(de)));
+					denuncias.forEach(de -> detalhesDenunciaDTOs.add(new DetalhesDenunciaDTO(de)));
 
-			return ResponseEntity.ok(detalhesDenunciaDTOs);
-		} else {
-			tipoAnimal = StringUtils.capitalize(tipoAnimal); // Primeira letra da string maiúscula
-			AnimaisEnum animalEnum = modelMapper.map(tipoAnimal, AnimaisEnum.class);
+					return ResponseEntity.ok(detalhesDenunciaDTOs);
 
-			// Busca os IDs de animais relacionados com o tipo informado:
-			Optional<List<Animais>> animais = animaisRepository.findByTipoEquals(animalEnum);
-			if (animais.get().size()>0){
-				List<DetalhesDenunciaDTO> denuncias = new ArrayList<>();
-				animais.get().forEach( animal -> {
-					denuncias.add(new DetalhesDenunciaDTO(
-							denunciaRepository.findByAnimalIdEquals(animal.getId()).get()));
-				});
-				return ResponseEntity.ok(denuncias);
+				} catch (Exception e) {
+					throw new ExceptionResponse();
+				}
 			}
-			return  ResponseEntity.notFound().build();
-		}
+			else {
+					try {	
+						tipoAnimal = StringUtils.capitalize(tipoAnimal); // Primeira letra da string maiúscula
+						AnimaisEnum animalEnum = modelMapper.map(tipoAnimal, AnimaisEnum.class);
+
+						// Busca os IDs de animais relacionados com o tipo informado:
+						Optional<List<Animais>> animais = animaisRepository.findByTipoEquals(animalEnum);
+						if (animais.get().size()>0){
+							List<DetalhesDenunciaDTO> denuncias = new ArrayList<>();
+							animais.get().forEach( animal -> {
+								denuncias.add(new DetalhesDenunciaDTO(
+									denunciaRepository.findByAnimalIdEquals(animal.getId()).get()));
+							});
+							return ResponseEntity.ok(denuncias);
+						}
+						return  ResponseEntity.notFound().build();
+					} catch (Exception e) {
+						throw new ExceptionResponse();
+					}
+			}
 	}
 
 	@Override
@@ -156,22 +167,28 @@ public class DenunciaServiceImpl implements DenunciaService {
 
 	@Override
 	public ResponseEntity<DenunciaDTO> getDenuncia(int id) {
-		Optional<Denuncias> dOptional = denunciaRepository.findById(id);
-		if(dOptional.isPresent()){
-			return ResponseEntity.ok(modelMapper.map(dOptional.get(), DenunciaDTO.class));
-		}
-		return ResponseEntity.notFound().build();
+		try {
+			Optional<Denuncias> dOptional = denunciaRepository.findById(id);
+			if(dOptional.isPresent()){
+				return ResponseEntity.ok(modelMapper.map(dOptional.get(), DenunciaDTO.class));
+			}
+			return ResponseEntity.notFound().build();
+		} catch (Exception e) {
+			throw new ExceptionResponse();
+		}	
 	}
 
 	@Override
 	public ResponseEntity<StatusDenuncia> listStatus(int id) {
-		Optional<Denuncias> dOptional = denunciaRepository.findById(id);
-		if(dOptional.isPresent()){
+		try {
+			Optional<Denuncias> dOptional = denunciaRepository.findById(id);
+			if(dOptional.isPresent()){
 
-			return ResponseEntity.ok(dOptional.get().getStatus());
+				return ResponseEntity.ok(dOptional.get().getStatus());
+			}
+			return ResponseEntity.notFound().build();
+		} catch (Exception e) {
+			throw new ExceptionResponse();
 		}
-
-		return ResponseEntity.notFound().build();
 	}
-
 }
