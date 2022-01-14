@@ -96,11 +96,7 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
             return ResponseEntity.notFound().build();
         } catch (Exception e) {
             throw new ExceptionResponse();
-        }    
-            
         }
-
-        return ResponseEntity.notFound().build();
     }
 
     @Override
