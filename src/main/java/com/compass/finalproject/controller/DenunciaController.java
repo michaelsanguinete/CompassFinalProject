@@ -5,6 +5,8 @@ import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
 import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
 import com.compass.finalproject.entity.StatusDenuncia;
 import com.compass.finalproject.service.DenunciaService;
+import com.compass.finalproject.service.OrgaoResponsavelService;
+import com.compass.finalproject.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,9 @@ public class DenunciaController {
 
     @Autowired
 	private DenunciaService denunciaService;
+
+	@Autowired
+	private OrgaoResponsavelService orgaoResponsavelService;
 
 	@GetMapping
 	@Transactional
@@ -51,6 +56,13 @@ public class DenunciaController {
         return this.denunciaService.save(body);
     }
 
+
+	@PutMapping("/alterarStatus/{id}")
+	@Transactional
+	public ResponseEntity<?> alterarStatusID(@PathVariable int id){
+		return this.orgaoResponsavelService.alteraStatusDenuncia(id);
+	}
+
 	@GetMapping("/status/{id}")
 	@Transactional
 	public ResponseEntity<StatusDenuncia> listStatus(@PathVariable int id){
@@ -58,5 +70,6 @@ public class DenunciaController {
 	}
     
     
+
 
 }

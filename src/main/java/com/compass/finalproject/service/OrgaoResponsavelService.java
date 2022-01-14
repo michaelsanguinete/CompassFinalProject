@@ -4,6 +4,7 @@ import com.compass.finalproject.DTO.DenunciaDTO;
 import com.compass.finalproject.DTO.OrgaoResponsavelDTO;
 import com.compass.finalproject.DTO.OrgaoResponsavelFormDTO;
 
+import com.compass.finalproject.entity.Denuncias;
 import org.springframework.http.ResponseEntity;
 
 public interface OrgaoResponsavelService {
@@ -13,6 +14,8 @@ public interface OrgaoResponsavelService {
     ResponseEntity<DenunciaDTO> listDenuncias(int id);
 
     ResponseEntity<OrgaoResponsavelDTO> uptadeOrgaoResponsavel(int id, OrgaoResponsavelFormDTO body);
+
+    ResponseEntity<?> alteraStatusDenuncia(int id);
 
     
 }

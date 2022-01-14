@@ -27,5 +27,7 @@ public class Denuncias {
 	private StatusDenuncia status = StatusDenuncia.Aberto;
 	@Column(name = "DATACRIACAO")
 	private LocalDateTime dataCriacao = LocalDateTime.now();
+	private LocalDateTime dataTratativa;
+	private LocalDateTime dataConclusao;
 
 }
