@@ -27,7 +27,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(value = {ExceptionResponse.class})
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public ErrorMessage exceptionResponse(ExceptionResponse e, WebRequest request){
-        return  new ErrorMessage(e.getMessage(), e.getCause());
+        return new ErrorMessage(e.getMessage(), e.getCause());
     }
 
     @ExceptionHandler(value = {MethodArgumentTypeMismatchException.class})
