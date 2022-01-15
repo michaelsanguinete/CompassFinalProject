@@ -72,8 +72,7 @@ public class DenunciaServiceImpl implements DenunciaService {
 			this.denunciaRepository.save(denuncia);
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 		} catch (Exception e) {
-			e.printStackTrace(); // Método temporário
-			return ResponseEntity.internalServerError().build(); // Método temporário
+			throw new ExceptionResponse(e.getMessage());
 		}
 	}
 
@@ -120,49 +119,56 @@ public class DenunciaServiceImpl implements DenunciaService {
 
 	@Override
 	public ResponseEntity<DenunciaDTO> update(int id, DenunciaSaveFormDTO formDTO) {
-		Optional<Denuncias> denuncia = this.denunciaRepository.findById(id);
-		if (denuncia.isPresent()){
-			Optional<Endereco> endereco = this.enderecoRepository.findById(denuncia.get().getEnderecoDenuncia().getId());
-			Optional<Animais> animal = this.animaisRepository.findById(denuncia.get().getAnimal().getId());
+		try {
+			Optional<Denuncias> denuncia = this.denunciaRepository.findById(id);
+			if (denuncia.isPresent()) {
+				Optional<Endereco> endereco = this.enderecoRepository.findById(denuncia.get().getEnderecoDenuncia().getId());
+				Optional<Animais> animal = this.animaisRepository.findById(denuncia.get().getAnimal().getId());
 
-			// Verifica se o status está em como "Aberto", caso contrário o usuário
-			// não pode alterar a denúncia
-			if(denuncia.get().getStatus().equals(StatusDenuncia.Aberto)) {
-				denuncia.get().setMensagem(formDTO.getMensagem());
-				// Alterando Endereço
-				endereco.get().setBairro(formDTO.getEnderecoDenuncia().getBairro());
-				endereco.get().setCep(formDTO.getEnderecoDenuncia().getCep());
-				endereco.get().setCidade(formDTO.getEnderecoDenuncia().getCidade());
-				endereco.get().setComplemento(formDTO.getEnderecoDenuncia().getComplemento());
-				endereco.get().setEstado(formDTO.getEnderecoDenuncia().getEstado());
-				endereco.get().setLogradouro(formDTO.getEnderecoDenuncia().getLogradouro());
-				endereco.get().setNumero(formDTO.getEnderecoDenuncia().getNumero());
+				// Verifica se o status está em como "Aberto", caso contrário o usuário
+				// não pode alterar a denúncia
+				if (denuncia.get().getStatus().equals(StatusDenuncia.Aberto)) {
+					denuncia.get().setMensagem(formDTO.getMensagem());
+					// Alterando Endereço
+					endereco.get().setBairro(formDTO.getEnderecoDenuncia().getBairro());
+					endereco.get().setCep(formDTO.getEnderecoDenuncia().getCep());
+					endereco.get().setCidade(formDTO.getEnderecoDenuncia().getCidade());
+					endereco.get().setComplemento(formDTO.getEnderecoDenuncia().getComplemento());
+					endereco.get().setEstado(formDTO.getEnderecoDenuncia().getEstado());
+					endereco.get().setLogradouro(formDTO.getEnderecoDenuncia().getLogradouro());
+					endereco.get().setNumero(formDTO.getEnderecoDenuncia().getNumero());
 
-				// Alterando Animal
-				animal.get().setCor(formDTO.getAnimal().getCor());
-				animal.get().setRaca(formDTO.getAnimal().getRaca());
-				animal.get().setTipo(formDTO.getAnimal().getTipo());
+					// Alterando Animal
+					animal.get().setCor(formDTO.getAnimal().getCor());
+					animal.get().setRaca(formDTO.getAnimal().getRaca());
+					animal.get().setTipo(formDTO.getAnimal().getTipo());
 
-				// Atualizando denúncia
-				denuncia.get().setEnderecoDenuncia(endereco.get());
-				denuncia.get().setAnimal(animal.get());
+					// Atualizando denúncia
+					denuncia.get().setEnderecoDenuncia(endereco.get());
+					denuncia.get().setAnimal(animal.get());
 
-				return ResponseEntity.ok(modelMapper.map(denuncia.get(), DenunciaDTO.class));
+					return ResponseEntity.ok(modelMapper.map(denuncia.get(), DenunciaDTO.class));
+				}
+				return ResponseEntity.badRequest().build(); // Denuncia não pode ser alterada (status não está em aberto)
 			}
-			return ResponseEntity.badRequest().build();      // Método temporário
+			return ResponseEntity.notFound().build();
+		} catch (Exception e) {
+			throw new ExceptionResponse(e.getMessage());
 		}
-		return ResponseEntity.notFound().build();    // Método temporário
 	}
 
 	@Override
 	public ResponseEntity<?> delete(int id) {
-		Optional<Denuncias> optional = denunciaRepository.findById(id);
-		if (optional.isPresent()) {
-			denunciaRepository.deleteById(id);
-			return ResponseEntity.ok().build();
+		try {
+			Optional<Denuncias> optional = denunciaRepository.findById(id);
+			if (optional.isPresent()) {
+				denunciaRepository.deleteById(id);
+				return ResponseEntity.ok().build();
+			}
+			return ResponseEntity.notFound().build();
+		} catch (Exception e) {
+			throw new ExceptionResponse(e.getMessage());
 		}
-		return ResponseEntity.notFound().build();
-
 	}
 
 	@Override
