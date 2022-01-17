@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/orgaoresponsavel")
 public class OrgaoResponsavelController {
@@ -33,13 +35,14 @@ public class OrgaoResponsavelController {
 
     @GetMapping("/{id}/denuncia")
     @Transactional
-    public ResponseEntity<DenunciaDTO> listDenuncias(@PathVariable int id){
+    public ResponseEntity<List<DenunciaDTO>> listDenuncias(@PathVariable int id){
         return this.orgaoResponsavelService.listDenuncias(id);
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<OrgaoResponsavelDTO> uptadeOrgaoResponsavel(@PathVariable int id, @Valid  @RequestBody OrgaoResponsavelFormDTO body){
+    public ResponseEntity<OrgaoResponsavelDTO> uptadeOrgaoResponsavel(@PathVariable int id,
+                                                                      @Valid  @RequestBody OrgaoResponsavelFormDTO body){
         return this.orgaoResponsavelService.uptadeOrgaoResponsavel(id, body);
     }
 
