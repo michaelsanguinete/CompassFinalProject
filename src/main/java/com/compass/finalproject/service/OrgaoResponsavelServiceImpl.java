@@ -63,9 +63,28 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
     }
 
     @Override
-    public ResponseEntity<DenunciaDTO> listDenuncias(int id) {
-        // TODO Auto-generated method stub
-        return null;
+    public ResponseEntity<List<DenunciaDTO>> listDenuncias(int id) {
+        //try {
+            Optional<OrgaoResponsavel> orgaoResponsavel = this.orgaoReponsavelRepository.findById(id);
+            if (orgaoResponsavel.isPresent()) {
+                Optional<List<Denuncias>> denunciasList =
+                        this.denunciaRepository.findByOrgaoResponsavelIdEquals(orgaoResponsavel.get().getId());
+                if (denunciasList.get().size() > 0){
+                    List<DenunciaDTO> denunciaDTO = new ArrayList<>();
+                    denunciasList.get().forEach( de -> {
+                        System.out.println(de.getOrgaoResponsavel());
+                        denunciaDTO.add(modelMapper.map(de, DenunciaDTO.class));
+                    });
+                    return ResponseEntity.ok(denunciaDTO);
+                }
+                return ResponseEntity.notFound().build(); // Nenhuma denuncia atribuida ao órgão
+            }
+            return ResponseEntity.notFound().build();  // Orgão responsável não encontrado
+       /*
+        } catch (Exception e){
+            throw new ExceptionResponse(500);
+        }
+        */
     }
 
     @Override
