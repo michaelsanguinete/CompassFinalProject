@@ -21,7 +21,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +63,7 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
 
     @Override
     public ResponseEntity<List<DenunciaDTO>> listDenuncias(int id) {
-        //try {
+        try {
             Optional<OrgaoResponsavel> orgaoResponsavel = this.orgaoReponsavelRepository.findById(id);
             if (orgaoResponsavel.isPresent()) {
                 Optional<List<Denuncias>> denunciasList =
@@ -80,11 +79,9 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
                 return ResponseEntity.notFound().build(); // Nenhuma denuncia atribuida ao órgão
             }
             return ResponseEntity.notFound().build();  // Orgão responsável não encontrado
-       /*
         } catch (Exception e){
             throw new ExceptionResponse(500);
         }
-        */
     }
 
     @Override
