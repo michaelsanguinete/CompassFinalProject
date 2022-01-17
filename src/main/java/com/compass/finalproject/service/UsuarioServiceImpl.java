@@ -54,7 +54,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 		}
 		catch (Exception e) {
-			throw new ExceptionResponse();
+			throw new ExceptionResponse(400,e.getMessage());
 		}
 	}
 

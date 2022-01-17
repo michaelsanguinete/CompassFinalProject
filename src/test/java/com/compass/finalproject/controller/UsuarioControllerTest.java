@@ -25,14 +25,14 @@ public class UsuarioControllerTest {
     
     @Test
     public void deveriaDevolver400CasoAlgumDadoEstejaIncorretoNoPost() throws Exception{
-        String json = "{\"email\": \"teste@teste.com\",\"enderecoUsuario\":{\"logradouro\": \"Rua das velhas\",\"estado\": \"MG\",\"complemento\": \"Apto 323\",\"bairro\": \"Caiçaras\",\"cidade\": \"BH\",\"numero\": \"2asdasd\",\"cep\": \"31323232\"},\"nome\": \"Michael\",\"senha\":\"daasdds\",\"telefone\": \"123123123\"}";
+        String json = "{\"email\": \"teste@teste.com\",\"enderecoUsuario\":{\"logradouro\": \"Rua das velhas\",\"estado\": \"MG\",\"complemento\": \"Apto 323\",\"bairro\": \"Caiçaras\",\"cidade\": \"BH\",\"numero\": \"243\",\"cep\": \"31323232\"},\"nome\": \"Michael\",\"senha\":\"daasdds\",\"telefone\": \"123123123\"}";
         RequestBuilder request = MockMvcRequestBuilders
-                .post("/usuario")
-                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", ""))
-                .content(json)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
-            mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest());
+            .post("/usuario")
+            .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", ""))
+            .content(json)
+            .accept(MediaType.APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON);
+        mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
     @Test
@@ -40,11 +40,11 @@ public class UsuarioControllerTest {
         long id = 1;
         String json = "{\"email\": \"teste@teste.com\",\"enderecoUsuario\":{\"logradouro\": \"Rua das velhas\",\"estado\": \"MG\",\"complemento\": \"Apto 323\",\"bairro\": \"Caiçaras\",\"cidade\": \"BH\",\"numero\": \"asdasdad\",\"cep\": \"31323232\"},\"nome\": \"Michael\",\"senha\":\"daasdds\",\"telefone\": \"123123123\"}";
         RequestBuilder request = MockMvcRequestBuilders
-                .put("/usuario/" + id)
-                .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", ""))
-                .content(json)
-                .accept(MediaType.APPLICATION_JSON)
-                .contentType(MediaType.APPLICATION_JSON);
-            mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest());
+            .put("/usuario/" + id)
+            .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", ""))
+            .content(json)
+            .accept(MediaType.APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON);
+        mockMvc.perform(request).andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 }
