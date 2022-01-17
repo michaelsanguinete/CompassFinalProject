@@ -1,5 +1,7 @@
 package com.compass.finalproject.controller;
 
+import javax.validation.Valid;
+
 import com.compass.finalproject.DTO.DenunciaDTO;
 import com.compass.finalproject.DTO.OrgaoResponsavelDTO;
 import com.compass.finalproject.DTO.OrgaoResponsavelFormDTO;
@@ -25,7 +27,7 @@ public class OrgaoResponsavelController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<OrgaoResponsavelDTO> save(@RequestBody OrgaoResponsavelFormDTO body){
+    public ResponseEntity<OrgaoResponsavelDTO> save(@Valid @RequestBody OrgaoResponsavelFormDTO body){
         return this.orgaoResponsavelService.save(body);
     }
 
@@ -37,7 +39,7 @@ public class OrgaoResponsavelController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<OrgaoResponsavelDTO> uptadeOrgaoResponsavel(@PathVariable int id, @RequestBody OrgaoResponsavelFormDTO body){
+    public ResponseEntity<OrgaoResponsavelDTO> uptadeOrgaoResponsavel(@PathVariable int id, @Valid  @RequestBody OrgaoResponsavelFormDTO body){
         return this.orgaoResponsavelService.uptadeOrgaoResponsavel(id, body);
     }
 

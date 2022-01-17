@@ -1,6 +1,7 @@
 package com.compass.finalproject.controller;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +32,14 @@ public class UsuarioController {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<UsuarioDTO> save (@RequestBody UsuarioFormDTO body){
+	public ResponseEntity<UsuarioDTO> save (@Valid @RequestBody UsuarioFormDTO body){
 		return this.usuarioService.save(body);
 	}
 	
 
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<UsuarioDTO> update (@PathVariable int id, @RequestBody UsuarioFormDTO body){
+	public ResponseEntity<UsuarioDTO> update (@PathVariable int id,@Valid @RequestBody UsuarioFormDTO body){
 		return this.usuarioService.update(id, body);
 	}
 	

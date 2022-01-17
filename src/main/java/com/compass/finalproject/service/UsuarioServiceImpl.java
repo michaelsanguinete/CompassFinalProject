@@ -54,7 +54,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 		}
 		catch (Exception e) {
+
 			throw new ExceptionResponse(500, "Erro interno no servidor!");
+
 		}
 	}
 
