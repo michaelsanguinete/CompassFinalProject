@@ -58,7 +58,7 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
             return ResponseEntity.status(HttpStatus.CREATED).build();
         
         } catch (Exception e){
-            throw new ExceptionResponse();
+            throw new ExceptionResponse(500);
         }
     }
 
@@ -93,9 +93,9 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
 
                 return ResponseEntity.ok(modelMapper.map(orgaoResponsavel.get(), OrgaoResponsavelDTO.class));
             }
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();   // Órgão responsável não encontrado
         } catch (Exception e) {
-            throw new ExceptionResponse();
+            throw new ExceptionResponse(500);
         }
     }
 
@@ -120,7 +120,7 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
                         return ResponseEntity.ok().build();
                     }
                     if(denuncia.get().getStatus().equals(StatusDenuncia.Tratado)){
-                        return ResponseEntity.badRequest().build();
+                        return ResponseEntity.badRequest().build(); // Denúncia já tratata
                     }
                 }
                 return ResponseEntity.badRequest().build(); // Denúncia já atribuida a outro orgão

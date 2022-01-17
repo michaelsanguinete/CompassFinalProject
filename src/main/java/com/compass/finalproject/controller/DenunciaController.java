@@ -6,7 +6,6 @@ import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
 import com.compass.finalproject.entity.StatusDenuncia;
 import com.compass.finalproject.service.DenunciaService;
 import com.compass.finalproject.service.OrgaoResponsavelService;
-import com.compass.finalproject.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;

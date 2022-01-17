@@ -54,7 +54,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 		}
 		catch (Exception e) {
-			throw new ExceptionResponse();
+			throw new ExceptionResponse(500, "Erro interno no servidor!");
 		}
 	}
 
@@ -82,7 +82,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 				return ResponseEntity.notFound().build();
 			}
 		} catch (Exception e) {
-			throw new ExceptionResponse();
+			throw new ExceptionResponse(500, "Erro interno no servidor!");
 		}	
 			
 	}
@@ -101,11 +101,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 					});
 					return  ResponseEntity.ok(detalhesDenunciaDTOS);
 				}
-				return ResponseEntity.notFound().build();
+				throw new ExceptionResponse(404, "Não foram encontradas denúncias realizadas por este usuário!");
 			}
-			return ResponseEntity.notFound().build();
+			throw new ExceptionResponse(404, "Usuário não encontrado!");
 		} catch (Exception e) {
-			throw new ExceptionResponse();
+			throw new ExceptionResponse(500, "Erro interno no servidor!");
 		}	
 	}	
 }
