@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/denuncia")
 public class DenunciaController {
@@ -46,13 +48,13 @@ public class DenunciaController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<DenunciaDTO> updateDenuncia(@PathVariable int id, @RequestBody DenunciaSaveFormDTO body){
+    public ResponseEntity<DenunciaDTO> updateDenuncia(@PathVariable int id, @RequestBody @Valid DenunciaSaveFormDTO body){
         return this.denunciaService.update(id, body);
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity<DenunciaDTO> save(@RequestBody DenunciaSaveFormDTO body){
+    public ResponseEntity<DenunciaDTO> save(@RequestBody @Valid DenunciaSaveFormDTO body){
         return this.denunciaService.save(body);
     }
 
