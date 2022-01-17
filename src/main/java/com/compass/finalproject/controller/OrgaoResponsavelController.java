@@ -27,7 +27,7 @@ public class OrgaoResponsavelController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<OrgaoResponsavelDTO> save(@RequestBody @Valid OrgaoResponsavelFormDTO body){
+    public ResponseEntity<OrgaoResponsavelDTO> save(@Valid @RequestBody OrgaoResponsavelFormDTO body){
         return this.orgaoResponsavelService.save(body);
     }
 
@@ -39,7 +39,7 @@ public class OrgaoResponsavelController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<OrgaoResponsavelDTO> uptadeOrgaoResponsavel(@PathVariable int id, @RequestBody @Valid OrgaoResponsavelFormDTO body){
+    public ResponseEntity<OrgaoResponsavelDTO> uptadeOrgaoResponsavel(@PathVariable int id, @Valid  @RequestBody OrgaoResponsavelFormDTO body){
         return this.orgaoResponsavelService.uptadeOrgaoResponsavel(id, body);
     }
 

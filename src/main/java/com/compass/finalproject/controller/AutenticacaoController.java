@@ -16,7 +16,7 @@ public class AutenticacaoController {
     
 
     @PostMapping
-    public ResponseEntity<?> autenticar(@RequestBody @Valid LoginForm form){
+    public ResponseEntity<?> autenticar(@Valid @RequestBody LoginForm form){
         
         System.out.println(form.getEmail()); //temporario
         System.out.println(form.getSenha()); // temporario

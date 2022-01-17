@@ -48,13 +48,13 @@ public class DenunciaController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<DenunciaDTO> updateDenuncia(@PathVariable int id, @RequestBody @Valid DenunciaSaveFormDTO body){
+    public ResponseEntity<DenunciaDTO> updateDenuncia(@PathVariable int id, @Valid @RequestBody DenunciaSaveFormDTO body){
         return this.denunciaService.update(id, body);
     }
 
     @PostMapping
     @Transactional
-    public ResponseEntity<DenunciaDTO> save(@RequestBody @Valid DenunciaSaveFormDTO body){
+    public ResponseEntity<DenunciaDTO> save(@Valid @RequestBody DenunciaSaveFormDTO body){
         return this.denunciaService.save(body);
     }
 
