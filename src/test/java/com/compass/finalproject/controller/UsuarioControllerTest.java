@@ -25,7 +25,7 @@ public class UsuarioControllerTest {
     
     @Test
     public void deveriaDevolver400CasoAlgumDadoEstejaIncorretoNoPost() throws Exception{
-        String json = "{\"email\": \"teste@teste.com\",\"enderecoUsuario\":{\"logradouro\": \"Rua das velhas\",\"estado\": \"MG\",\"complemento\": \"Apto 323\",\"bairro\": \"Caiçaras\",\"cidade\": \"BH\",\"numero\": \"243\",\"cep\": \"31323232\"},\"nome\": \"Michael\",\"senha\":\"daasdds\",\"telefone\": \"123123123\"}";
+        String json = "{\"emai\": \"teste@teste.com\",\"enderecoUsuario\":{\"logradouro\": \"Rua das velhas\",\"estado\": \"MG\",\"complemento\": \"Apto 323\",\"bairro\": \"Caiçaras\",\"cidade\": \"BH\",\"numero\": \"123\",\"cep\": \"31323232\"},\"nome\": \"Michael\",\"senha\":\"daasdds\",\"telefone\": \"123123123\"}";
         RequestBuilder request = MockMvcRequestBuilders
             .post("/usuario")
             .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", ""))
@@ -38,7 +38,7 @@ public class UsuarioControllerTest {
     @Test
     public void deveriaDevolver400CasoAlgumDadoEstejaIncorretoNoUptade() throws Exception{
         long id = 1;
-        String json = "{\"email\": \"teste@teste.com\",\"enderecoUsuario\":{\"logradouro\": \"Rua das velhas\",\"estado\": \"MG\",\"complemento\": \"Apto 323\",\"bairro\": \"Caiçaras\",\"cidade\": \"BH\",\"numero\": \"asdasdad\",\"cep\": \"31323232\"},\"nome\": \"Michael\",\"senha\":\"daasdds\",\"telefone\": \"123123123\"}";
+        String json = "{\"emai\": \"teste@teste.com\",\"enderecoUsuario\":{\"logradouro\": \"Rua das velhas\",\"estado\": \"MG\",\"complemento\": \"Apto 323\",\"bairro\": \"Caiçaras\",\"cidade\": \"BH\",\"numero\": \"asdasdad\",\"cep\": \"31323232\"},\"nome\": \"Michael\",\"senha\":\"daasdds\",\"telefone\": \"123123123\"}";
         RequestBuilder request = MockMvcRequestBuilders
             .put("/usuario/" + id)
             .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", ""))
