@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter

@@ -72,7 +72,7 @@ public class DenunciaServiceImpl implements DenunciaService {
 			this.denunciaRepository.save(denuncia);
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 		} catch (Exception e) {
-			throw new ExceptionResponse(400, "Erro no preenchimento do formulário");
+			throw new ExceptionResponse(400, e.getMessage());
 		}
 	}
 
@@ -112,7 +112,7 @@ public class DenunciaServiceImpl implements DenunciaService {
 						}
 						return  ResponseEntity.notFound().build();
 					} catch (Exception e) {
-						throw new ExceptionResponse(400);
+						throw new ExceptionResponse(400, e.getMessage());
 					}
 			}
 	}
