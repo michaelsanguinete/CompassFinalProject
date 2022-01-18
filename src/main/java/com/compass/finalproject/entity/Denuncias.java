@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,14 +16,17 @@ public class Denuncias {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@NotNull
 	private String mensagem;
 	@ManyToOne
 	private Usuario denunciante;
 	@ManyToOne
 	private OrgaoResponsavel orgaoResponsavel;
 	@OneToOne
+	@NotNull
 	private Animais animal;
 	@OneToOne
+	@NotNull
 	private Endereco enderecoDenuncia;
 	@Enumerated(EnumType.STRING)
 	private StatusDenuncia status = StatusDenuncia.Aberto;
