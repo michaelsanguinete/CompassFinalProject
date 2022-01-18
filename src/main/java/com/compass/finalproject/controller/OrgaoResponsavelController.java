@@ -1,5 +1,7 @@
 package com.compass.finalproject.controller;
 
+import javax.validation.Valid;
+
 import com.compass.finalproject.DTO.DenunciaDTO;
 import com.compass.finalproject.DTO.OrgaoResponsavelDTO;
 import com.compass.finalproject.DTO.OrgaoResponsavelFormDTO;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/orgaoresponsavel")
 public class OrgaoResponsavelController {
@@ -25,19 +29,20 @@ public class OrgaoResponsavelController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<OrgaoResponsavelDTO> save(@RequestBody OrgaoResponsavelFormDTO body){
+    public ResponseEntity<OrgaoResponsavelDTO> save(@Valid @RequestBody OrgaoResponsavelFormDTO body){
         return this.orgaoResponsavelService.save(body);
     }
 
     @GetMapping("/{id}/denuncia")
     @Transactional
-    public ResponseEntity<DenunciaDTO> listDenuncias(@PathVariable int id){
+    public ResponseEntity<List<DenunciaDTO>> listDenuncias(@PathVariable int id){
         return this.orgaoResponsavelService.listDenuncias(id);
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<OrgaoResponsavelDTO> uptadeOrgaoResponsavel(@PathVariable int id, @RequestBody OrgaoResponsavelFormDTO body){
+    public ResponseEntity<OrgaoResponsavelDTO> uptadeOrgaoResponsavel(@PathVariable int id,
+                                                                      @Valid  @RequestBody OrgaoResponsavelFormDTO body){
         return this.orgaoResponsavelService.uptadeOrgaoResponsavel(id, body);
     }
 

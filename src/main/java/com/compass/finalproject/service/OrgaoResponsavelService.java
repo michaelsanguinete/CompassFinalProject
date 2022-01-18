@@ -7,11 +7,13 @@ import com.compass.finalproject.DTO.OrgaoResponsavelFormDTO;
 import com.compass.finalproject.entity.Denuncias;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface OrgaoResponsavelService {
 
     ResponseEntity<OrgaoResponsavelDTO> save(OrgaoResponsavelFormDTO body);
 
-    ResponseEntity<DenunciaDTO> listDenuncias(int id);
+    ResponseEntity<List<DenunciaDTO>> listDenuncias(int id);
 
     ResponseEntity<OrgaoResponsavelDTO> uptadeOrgaoResponsavel(int id, OrgaoResponsavelFormDTO body);
 

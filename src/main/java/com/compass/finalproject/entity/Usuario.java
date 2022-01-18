@@ -5,8 +5,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.validation.constraints.NotNull;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,12 +24,18 @@ public class Usuario implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Integer id;
+	@NotNull
 	private String nome;
 	@OneToOne
+	@NotNull
 	private Endereco enderecoUsuario;
+	@NotNull
 	private String telefone;
+	@NotNull
 	private String email;
+	@NotNull
 	private String senha;
 	@OneToMany
 	private List<Denuncias> listaDenuncias = new ArrayList<Denuncias>();

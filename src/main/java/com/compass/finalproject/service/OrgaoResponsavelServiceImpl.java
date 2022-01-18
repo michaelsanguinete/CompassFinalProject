@@ -21,7 +21,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,14 +57,31 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
             return ResponseEntity.status(HttpStatus.CREATED).build();
         
         } catch (Exception e){
-            throw new ExceptionResponse();
+            throw new ExceptionResponse(500);
         }
     }
 
     @Override
-    public ResponseEntity<DenunciaDTO> listDenuncias(int id) {
-        // TODO Auto-generated method stub
-        return null;
+    public ResponseEntity<List<DenunciaDTO>> listDenuncias(int id) {
+        try {
+            Optional<OrgaoResponsavel> orgaoResponsavel = this.orgaoReponsavelRepository.findById(id);
+            if (orgaoResponsavel.isPresent()) {
+                Optional<List<Denuncias>> denunciasList =
+                        this.denunciaRepository.findByOrgaoResponsavelIdEquals(orgaoResponsavel.get().getId());
+                if (denunciasList.get().size() > 0){
+                    List<DenunciaDTO> denunciaDTO = new ArrayList<>();
+                    denunciasList.get().forEach( de -> {
+                        System.out.println(de.getOrgaoResponsavel());
+                        denunciaDTO.add(modelMapper.map(de, DenunciaDTO.class));
+                    });
+                    return ResponseEntity.ok(denunciaDTO);
+                }
+                return ResponseEntity.notFound().build(); // Nenhuma denuncia atribuida ao órgão
+            }
+            return ResponseEntity.notFound().build();  // Orgão responsável não encontrado
+        } catch (Exception e){
+            throw new ExceptionResponse(500);
+        }
     }
 
     @Override
@@ -93,9 +109,9 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
 
                 return ResponseEntity.ok(modelMapper.map(orgaoResponsavel.get(), OrgaoResponsavelDTO.class));
             }
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();   // Órgão responsável não encontrado
         } catch (Exception e) {
-            throw new ExceptionResponse();
+            throw new ExceptionResponse(500);
         }
     }
 
@@ -120,7 +136,7 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
                         return ResponseEntity.ok().build();
                     }
                     if(denuncia.get().getStatus().equals(StatusDenuncia.Tratado)){
-                        return ResponseEntity.badRequest().build();
+                        return ResponseEntity.badRequest().build(); // Denúncia já tratata
                     }
                 }
                 return ResponseEntity.badRequest().build(); // Denúncia já atribuida a outro orgão
