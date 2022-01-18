@@ -17,7 +17,6 @@ import java.util.List;
 @Entity
 @Table(name = "ORGAORESPONSAVEL")
 @NoArgsConstructor
-@AllArgsConstructor
 public class OrgaoResponsavel {
 
 	@Id
