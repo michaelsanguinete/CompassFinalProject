@@ -1,6 +1,8 @@
 package com.compass.finalproject.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "ORGAORESPONSAVEL")
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrgaoResponsavel {
 
 	@Id
