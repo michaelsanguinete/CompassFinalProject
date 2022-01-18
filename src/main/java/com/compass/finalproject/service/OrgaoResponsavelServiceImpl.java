@@ -57,7 +57,7 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
             return ResponseEntity.status(HttpStatus.CREATED).build();
         
         } catch (Exception e){
-            throw new ExceptionResponse(500);
+            throw new ExceptionResponse(400);
         }
     }
 
@@ -80,7 +80,7 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
             }
             return ResponseEntity.notFound().build();  // Orgão responsável não encontrado
         } catch (Exception e){
-            throw new ExceptionResponse(500);
+            throw new ExceptionResponse(400);
         }
     }
 
@@ -111,7 +111,7 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
             }
             return ResponseEntity.notFound().build();   // Órgão responsável não encontrado
         } catch (Exception e) {
-            throw new ExceptionResponse(500);
+            throw new ExceptionResponse(400);
         }
     }
 

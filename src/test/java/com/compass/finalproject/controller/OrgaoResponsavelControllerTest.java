@@ -28,7 +28,7 @@ public class OrgaoResponsavelControllerTest {
         String json = "{\"email\": \"teste@teste.com\",\"endereco\":{\"logradouro\": \"Rua das velhas\",\"estado\": \"MG\",\"complemento\": \"Apto 323\",\"bairro\": \"Caiçaras\",\"cidade\": \"BH\",\"numero\": \"asd2\",\"cep\": \"31323232\"},\"nome\": \"Michael\",\"senha\":\"daasdds\",\"telefone\": \"123123123\"}";
         RequestBuilder request = MockMvcRequestBuilders
             .post("/orgaoresponsavel")
-            .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", ""))
+            .header(HttpHeaders.AUTHORIZATION, String.format("Bearer %s", "" ))
             .content(json)
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.APPLICATION_JSON);

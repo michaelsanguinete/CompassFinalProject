@@ -55,7 +55,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 		catch (Exception e) {
 
-			throw new ExceptionResponse(500, "Erro interno no servidor!");
+			throw new ExceptionResponse(400, "Erro no preenchimento do formulario");
 
 		}
 	}
@@ -84,7 +84,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 				return ResponseEntity.notFound().build();
 			}
 		} catch (Exception e) {
-			throw new ExceptionResponse(500, "Erro interno no servidor!");
+			throw new ExceptionResponse(400, "Erro no preenchimento do formulario");
 		}	
 			
 	}
@@ -107,7 +107,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 			}
 			throw new ExceptionResponse(404, "Usuário não encontrado!");
 		} catch (Exception e) {
-			throw new ExceptionResponse(500, "Erro interno no servidor!");
+			throw new ExceptionResponse(400, "Erro no preenchimento do formulario");
 		}	
 	}	
 }
