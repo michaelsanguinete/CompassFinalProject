@@ -62,7 +62,7 @@ public class OrgaoResponsavelServiceImplTest {
     }
 
     @Test
-    public void deveriaRetornarNullComUmIdInexistenteNoUptade(){
+    public void deveriaRetornarNotFoundComUmIdInexistenteNoUptade(){
         MockitoAnnotations.openMocks(this);
         Endereco endereco = new Endereco(10000, "Rua das dalias", "MG", "Casa", "Jardim ipe", "Lagoa Santa", 29, 332232323);
         OrgaoResponsavelFormDTO formDTO = new OrgaoResponsavelFormDTO("Breno", endereco, "993949595", "breno@gmail.com", "12345");
