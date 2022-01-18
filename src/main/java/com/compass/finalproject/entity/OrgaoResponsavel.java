@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
-@AllArgsConstructor
 @Setter
 @Getter
 @Entity
