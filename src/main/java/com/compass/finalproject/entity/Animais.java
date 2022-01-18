@@ -12,6 +12,8 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Animais {
 	
 	@Id
