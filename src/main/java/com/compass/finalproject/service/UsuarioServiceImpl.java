@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.compass.finalproject.DTO.UsuarioDTO;
@@ -48,6 +49,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		Endereco enderecoUsuario = this.enderecoRepository.save(modelMapper.map(formDTO.getEnderecoUsuario(), Endereco.class));
 		Usuario usuario = modelMapper.map(formDTO, Usuario.class);
 		usuario.setEnderecoUsuario(enderecoUsuario);
+		usuario.setSenha(new BCryptPasswordEncoder().encode(formDTO.getSenha()));
 		usuarioRepository.save(usuario);
 	
 
