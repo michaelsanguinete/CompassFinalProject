@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.compass.finalproject.DTO.UsuarioDTO;
@@ -44,19 +45,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public ResponseEntity<UsuarioDTO> save(UsuarioFormDTO formDTO) {
 		try {
-
 		Endereco enderecoUsuario = this.enderecoRepository.save(modelMapper.map(formDTO.getEnderecoUsuario(), Endereco.class));
 		Usuario usuario = modelMapper.map(formDTO, Usuario.class);
 		usuario.setEnderecoUsuario(enderecoUsuario);
+		usuario.setSenha(new BCryptPasswordEncoder().encode(formDTO.getSenha()));
 		usuarioRepository.save(usuario);
-	
 
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 		}
 		catch (Exception e) {
-
-			throw new ExceptionResponse(500, "Erro interno no servidor!");
-
+			throw new ExceptionResponse(400, "Erro no preenchimento do formulario");
 		}
 	}
 
@@ -83,8 +81,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 			}else {
 				return ResponseEntity.notFound().build();
 			}
+
 		} catch (Exception e) {
-			throw new ExceptionResponse(500, "Erro interno no servidor!");
+			throw new ExceptionResponse(400, "Erro no preenchimento do formulario");
 		}	
 			
 	}
@@ -103,11 +102,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 					});
 					return  ResponseEntity.ok(detalhesDenunciaDTOS);
 				}
-				throw new ExceptionResponse(404, "Não foram encontradas denúncias realizadas por este usuário!");
+				return ResponseEntity.notFound().build();
 			}
-			throw new ExceptionResponse(404, "Usuário não encontrado!");
+			return ResponseEntity.notFound().build();
 		} catch (Exception e) {
-			throw new ExceptionResponse(500, "Erro interno no servidor!");
+			throw new ExceptionResponse(400, "Erro no preenchimento do formulario");
 		}	
 	}	
 }

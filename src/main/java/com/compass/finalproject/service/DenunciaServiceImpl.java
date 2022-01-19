@@ -72,7 +72,7 @@ public class DenunciaServiceImpl implements DenunciaService {
 			this.denunciaRepository.save(denuncia);
 			return ResponseEntity.status(HttpStatus.CREATED).build();
 		} catch (Exception e) {
-			throw new ExceptionResponse(500);
+			throw new ExceptionResponse(400, e.getMessage());
 		}
 	}
 
@@ -92,7 +92,7 @@ public class DenunciaServiceImpl implements DenunciaService {
 					return ResponseEntity.ok(detalhesDenunciaDTOs);
 
 				} catch (Exception e) {
-					throw new ExceptionResponse(500);
+					throw new ExceptionResponse(400);
 				}
 			}
 			else {
@@ -112,7 +112,7 @@ public class DenunciaServiceImpl implements DenunciaService {
 						}
 						return  ResponseEntity.notFound().build();
 					} catch (Exception e) {
-						throw new ExceptionResponse(500);
+						throw new ExceptionResponse(400, e.getMessage());
 					}
 			}
 	}
@@ -153,7 +153,7 @@ public class DenunciaServiceImpl implements DenunciaService {
 			}
 			return ResponseEntity.notFound().build();
 		} catch (Exception e) {
-			throw new ExceptionResponse(500);
+			throw new ExceptionResponse(400,"Erro no preenchimento do formulário");
 		}
 	}
 
@@ -167,7 +167,7 @@ public class DenunciaServiceImpl implements DenunciaService {
 			}
 			return ResponseEntity.notFound().build();
 		} catch (Exception e) {
-			throw new ExceptionResponse(500, "Não foi possível deletar a denúncia de ID "+id+" .");
+			throw new ExceptionResponse(400, "Não foi possível deletar a denúncia de ID "+id+" devido a um erro no formulario.");
 		}
 	}
 
@@ -180,7 +180,7 @@ public class DenunciaServiceImpl implements DenunciaService {
 			}
 			return ResponseEntity.notFound().build();
 		} catch (Exception e) {
-			throw new ExceptionResponse(500);
+			throw new ExceptionResponse(400);
 		}	
 	}
 
@@ -194,7 +194,7 @@ public class DenunciaServiceImpl implements DenunciaService {
 			}
 			return ResponseEntity.notFound().build();
 		} catch (Exception e) {
-			throw new ExceptionResponse(500);
+			throw new ExceptionResponse(400);
 		}
 	}
 }
