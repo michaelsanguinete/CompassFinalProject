@@ -14,6 +14,5 @@ public class UsuarioDTO {
 	private Endereco endereco;
 	private String telefone;
 	private String email;
-	private String senha;
 
 }

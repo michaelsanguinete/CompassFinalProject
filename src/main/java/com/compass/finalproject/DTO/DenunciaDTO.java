@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class DenunciaDTO {
     private int id;
     private String mensagem;
-    private Usuario denunciante;
+    private UsuarioDTO denunciante;
     private OrgaoResponsavel orgaoResponsavel;
     private Animais animal;
     private Endereco enderecoDenuncia;
