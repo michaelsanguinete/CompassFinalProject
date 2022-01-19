@@ -60,7 +60,7 @@ public class DenunciaServiceImplTeste {
 
        Mockito.when(usuarioRepository.getById(ArgumentMatchers.anyInt())).thenReturn(usuario);
 
-       assertEquals(ResponseEntity.status(HttpStatus.CREATED), denunciaService.save(denunciaSaveFormDTO)); 
+       assertEquals(ResponseEntity.status(HttpStatus.CREATED).build(), denunciaService.save(denunciaSaveFormDTO)); 
 
 
     }
@@ -85,4 +85,11 @@ public class DenunciaServiceImplTeste {
         assertEquals(ResponseEntity.notFound().build(), denunciaService.update(-1, denunciaSaveFormDTO)); 
     }
 
+    @Test
+    public void deveriaRetornarNotFoundSeNaoEncontrarNadaNoBanco(){
+        MockitoAnnotations.openMocks(this);
+        Optional<Denuncias> denuncia = Optional.empty();
+        Mockito.when(denunciaRepository.findById(1)).thenReturn(denuncia);
+        assertEquals(ResponseEntity.notFound().build(), denunciaService.getDenuncia(1)); 
+    }
 }
