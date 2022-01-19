@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
+import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
 import com.compass.finalproject.entity.Animais;
 import com.compass.finalproject.entity.AnimaisEnum;
 import com.compass.finalproject.entity.Denuncias;
@@ -91,5 +92,19 @@ public class DenunciaServiceImplTeste {
         Optional<Denuncias> denuncia = Optional.empty();
         Mockito.when(denunciaRepository.findById(1)).thenReturn(denuncia);
         assertEquals(ResponseEntity.notFound().build(), denunciaService.getDenuncia(1)); 
+    }
+
+    @Test
+    public void deveriaRetornarNotFoundAoDeletar(){
+        MockitoAnnotations.openMocks(this);
+        int id = -1;
+        assertEquals(ResponseEntity.status(HttpStatus.NOT_FOUND).build(), denunciaService.delete(id));
+    }
+
+    @Test
+    public void deveriaRetornarNotFoundAoListar(){
+        MockitoAnnotations.openMocks(this);
+        int id = 1;
+        assertEquals(ResponseEntity.status(HttpStatus.NOT_FOUND).build(), denunciaService.listStatus(id));
     }
 }
