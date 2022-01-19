@@ -58,10 +58,10 @@ public class DenunciaController {
     }
 
 
-	@PutMapping("/alterarStatus/{id}")
+	@PutMapping("{id}/alterarStatus/{idOrgaoResposavel}")
 	@Transactional
-	public ResponseEntity<?> alterarStatusID(@PathVariable int id){
-		return this.orgaoResponsavelService.alteraStatusDenuncia(id);
+	public ResponseEntity<?> alterarStatusID(@PathVariable int id, @PathVariable int idOrgaoResposavel){
+		return this.orgaoResponsavelService.alteraStatusDenuncia(id, idOrgaoResposavel);
 	}
 
 	@GetMapping("/status/{id}")

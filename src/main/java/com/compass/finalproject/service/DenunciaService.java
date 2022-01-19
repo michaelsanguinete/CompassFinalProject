@@ -6,7 +6,6 @@ import com.compass.finalproject.DTO.DenunciaSaveFormDTO;
 
 import com.compass.finalproject.DTO.DetalhesDenunciaDTO;
 
-import com.compass.finalproject.entity.AnimaisEnum;
 import com.compass.finalproject.entity.StatusDenuncia;
 import org.springframework.http.ResponseEntity;
 

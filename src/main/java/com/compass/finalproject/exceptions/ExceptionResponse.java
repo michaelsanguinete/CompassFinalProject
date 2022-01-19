@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 public class ExceptionResponse extends RuntimeException{
-
-    private int status;
+	
+	private static final long serialVersionUID = 1L;
+	private int status;
     private String message;
 
 

@@ -77,7 +77,7 @@ public class OrgaoResponsavelServiceImplTest {
         Denuncias denuncia = new Denuncias(10, "Maus tratos a meu cachorro", null, orgaoResponsavel, animal, endereco, StatusDenuncia.Aberto, LocalDateTime.now(), null, null);
         Mockito.when(this.orgaoReponsavelRepository.getById(1)).thenReturn(orgaoResponsavel);
         Mockito.when(this.denunciaRepository.findById(1)).thenReturn(Optional.of(denuncia));
-        assertEquals(ResponseEntity.ok().build(), orgaoResponsavelService.alteraStatusDenuncia(1));
+        assertEquals(ResponseEntity.ok().build(), orgaoResponsavelService.alteraStatusDenuncia(1, 0));
     }
 
 }

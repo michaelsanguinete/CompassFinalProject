@@ -25,7 +25,6 @@ import com.compass.finalproject.repository.UsuarioRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {

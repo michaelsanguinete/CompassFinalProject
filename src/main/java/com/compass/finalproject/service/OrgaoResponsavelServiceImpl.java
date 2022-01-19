@@ -116,8 +116,8 @@ public class OrgaoResponsavelServiceImpl implements OrgaoResponsavelService{
     }
 
     @Override
-    public ResponseEntity<?> alteraStatusDenuncia(int id) {
-        OrgaoResponsavel orgaoResponsavel = this.orgaoReponsavelRepository.getById(2);  // Alterar linha para usuário logado
+    public ResponseEntity<?> alteraStatusDenuncia(int id, int idOrgaoResposavel) {
+        OrgaoResponsavel orgaoResponsavel = this.orgaoReponsavelRepository.getById(idOrgaoResposavel);  // Alterar linha para usuário logado
         Optional<Denuncias> denuncia = this.denunciaRepository.findById(id);
         if (denuncia.isPresent()){
             // Verifica de a denuncia já foi atribuida à algum orgão responsável

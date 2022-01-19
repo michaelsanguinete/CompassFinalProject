@@ -3,7 +3,6 @@ package com.compass.finalproject.repository;
 import com.compass.finalproject.entity.Animais;
 
 import com.compass.finalproject.entity.AnimaisEnum;
-import com.compass.finalproject.entity.Denuncias;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

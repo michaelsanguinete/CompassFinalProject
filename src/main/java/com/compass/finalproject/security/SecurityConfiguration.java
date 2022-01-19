@@ -52,6 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.DELETE, "/denuncia/*").hasRole("ADMIN")
 		.antMatchers(HttpMethod.GET, "/denuncia/").hasRole("ADMIN")
 		.antMatchers(HttpMethod.GET, "/denuncia").hasRole("ADMIN")
+		.antMatchers(HttpMethod.PUT, "/denuncia/alterarStatus/*").hasRole("ADMIN")
+		.antMatchers(HttpMethod.PUT, "/orgaoresponsavel/*").hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

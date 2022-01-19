@@ -43,7 +43,7 @@ public class UsuarioController {
 		return this.usuarioService.update(id, body);
 	}
 	
-	@GetMapping("/{id}/denuncias")
+	@GetMapping("/{id}/denuncia")
 	@Transactional
 	public ResponseEntity<List<DetalhesDenunciaDTO>> denunciasDoUsuario(@PathVariable int id){
 		return this.usuarioService.denunciasDoUsuario(id);
